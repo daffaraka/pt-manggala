@@ -17,72 +17,97 @@
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             </ul>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small danger coloured-icon"><i class="icon fa fa-download fa-3x"></i>
-                    <div class="info">
-                        <h4>Export Excel</h4>
-                        <a href="/exportexcel">Export Excel</a>
+
+
+        <div class="row mb-3">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        User information
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ Auth::user()->name }} - <button
+                                class="btn btn-sm btn-info">{{ Auth::user()->roles->first()->name }} </button> </h5>
+                            <hr>
+                        <p class="card-text font-weight-bold">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small danger coloured-icon"><i class="icon fa fa-upload fa-3x"></i>
-                    <div class="info">
-                        <h4>Import Data</h4>
-                        <p><b>{{ $user }}</b></p>
+        </div>
+
+        @role(['Admin', 'SPV'])
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small danger coloured-icon"><i class="icon fa fa-download fa-3x"></i>
+                        <div class="info">
+                            <h4>Export Excel</h4>
+                            <a href="/exportexcel">Export Excel</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3"><a href="{{ route('pegawai.create') }}">
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small danger coloured-icon"><i class="icon fa fa-upload fa-3x"></i>
+                        <div class="info">
+                            <h4>Import Data</h4>
+                            <p><b>{{ $user }}</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-edit fa-3x"></i>
                         <div class="info">
-                </a>
-                <h4>Tambah Pegawai</h4>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-6 col-lg-3"><a href="{{ route('pegawai.index') }}">
-                <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
-                    <div class="info">
-            </a>
-            <h4>Data Pegawai</h4>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6 col-lg-3"><a href="{{ route('pegawai-pdf') }}">
-                <div class="widget-small danger coloured-icon"><i class="icon fa fa-download fa-3x"></i>
-                    <div class="info">
-            </a>
-            <h4>Report Pegawai</h4>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-                <div class="info">
-                    <h7>Jumlah Pegawai</h7>
-                    <p><b>{{ $jumlahpegawai }}</b></p>
+                            <a href="{{ route('pegawai.create') }}" class="nav-item text-dark">
+                                <h4>Tambah Pegawai</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+                        <div class="info">
+                            <a href="{{ route('pegawai.index') }}" class="text-dark">
+                                <h4>Data Pegawai</h4>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small danger coloured-icon"><i class="icon fa fa-download fa-3x"></i>
+                        <div class="info">
+                            <a href="{{ route('pegawai-pdf') }}">
+                                <h4>Report Pegawai</h4>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                        <div class="info">
+                            <h7>Jumlah Pegawai</h7>
+                            <p><b>{{ $jumlahpegawai }}</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                        <div class="info">
+                            <h7>Jumlah Pegawai Aktiv</h7>
+                            <p><b>{{ $pgw_aktiv }}</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                        <div class="info">
+                            <h7>Jumlah Pegawai Tidak Aktiv</h7>
+                            <p><b>{{ $pgw_tidak_aktiv }}</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-                <div class="info">
-                    <h7>Jumlah Pegawai Aktiv</h7>
-                    <p><b>{{ $pgw_aktiv }}</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-                <div class="info">
-                    <h7>Jumlah Pegawai Tidak Aktiv</h7>
-                    <p><b>{{ $pgw_tidak_aktiv }}</b></p>
-                </div>
-            </div>
-        </div>
-        </div>
+        @endrole
         {{-- <div class="row"> --}}
 
         {{-- <div class="col-md-6 col-lg-3">

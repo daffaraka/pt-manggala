@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 
 class AgamaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('role:Admin|SPV');
+    }
     public function index()
     {
         $agama = Agama::all();
@@ -37,10 +36,10 @@ class AgamaController extends Controller
     public function store(Request $request)
     {
         $agama = new Agama;
-        $agama-> nmagama = $request ->nmagama;
-        $agama-> save();
+        $agama->nmagama = $request->nmagama;
+        $agama->save();
 
-        return redirect('agama')->with('success','Data berhasil disimpan');
+        return redirect('agama')->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -74,10 +73,10 @@ class AgamaController extends Controller
      */
     public function update(Request $request, Agama $agama)
     {
-        $agama-> nmagama = $request ->nmagama;
-        $agama-> save();
+        $agama->nmagama = $request->nmagama;
+        $agama->save();
 
-        return redirect ('agama')->with('success','Data berhasil disimpan');
+        return redirect('agama')->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -90,6 +89,6 @@ class AgamaController extends Controller
     {
         $agama->delete();
 
-        return redirect('agama')->with('error','Data berhasil dihapus');
+        return redirect('agama')->with('error', 'Data berhasil dihapus');
     }
 }

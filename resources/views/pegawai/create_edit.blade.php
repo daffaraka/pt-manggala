@@ -304,7 +304,7 @@
                                 @if (isset($pegawai) && $pegawai->foto)
                                     <a href="{{ route('tampilfoto', $pegawai->id) }}" class="btn btn-primary mt-2">Lihat
                                         Foto</a>
-                                    <img src="{{ asset('dokumenpegawaitiga/' . $pegawai->foto) }}" alt="Foto"
+                                    <img src="{{ asset('berkas/pegawai/foto/' . $pegawai->foto) }}" alt="Foto"
                                         width="50px" height="50px" class="mt-2">
                                 @endif
 

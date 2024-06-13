@@ -91,8 +91,8 @@
                                         <td>{{ $no++ }}</td>
                                         <td>
                                             @if (isset($tampil->foto))
-                                                <img src="{{ asset('berkas/pegawai/foto/' . $tampil->foto) }}" alt=""
-                                                    width="50px" height="50px">
+                                                <img src="{{ asset('berkas/pegawai/foto/' . $tampil->foto) }}"
+                                                    alt="" width="50px" height="50px">
                                             @else
                                                 <img src="{{ asset('img/pegawai.png') }}" alt="" width="50px"
                                                     height="50px">
@@ -101,27 +101,32 @@
                                         <td>{{ $tampil->nip }}</td>
                                         <td>
                                             @if ($tampil->nama == Auth::user()->name)
-                                            <a href="{{ route('pegawai.show', $tampil->id) }}">{{ $tampil->nama }}</a></td>
-
-                                            @else
-                                            <p>{{ $tampil->nama }}</p></td>
-
-                                            @endif
-                                        <td>{{ $tampil->tmpt_lahir }},
-                                            {{ Carbon\Carbon::parse($tampil->tgl_lahir)->isoFormat('DD MMMM Y') }}</td>
-                                        <td>{{ $tampil->jenis_kelamin }}</td>
-                                        <td>{{ $tampil->nohp }}</td>
-                                        <td>
-                                            <a href="{{ url('/pegawai/' . $tampil->id . '/edit') }}" class="btn btn-info"><span
-                                                    class="fa fa-edit (alias)"></span></a>
-
+                                                <a href="{{ route('pegawai.show', $tampil->id) }}">{{ $tampil->nama }}</a>
                                         </td>
-                                        <td>
-                                            <button class="btn btn-danger btn_modal_hapus" type="button"
-                                                data-url="{{ route('pegawai.destroy', $tampil->id) }}"><span
-                                                    class="fa fa-trash"></span></button>
+                                    @else
+                                        <p>{{ $tampil->nama }}</p>
                                         </td>
-                                    </tr>
+                                @endif
+                                <td>{{ $tampil->tmpt_lahir }},
+                                    {{ Carbon\Carbon::parse($tampil->tgl_lahir)->isoFormat('DD MMMM Y') }}</td>
+                                <td>{{ $tampil->jenis_kelamin }}</td>
+                                <td>{{ $tampil->nohp }}</td>
+
+                                @can(['pegawai-edit','pegawai-hapus'])
+                                    <td>
+                                        <a href="{{ url('/pegawai/' . $tampil->id . '/edit') }}" class="btn btn-info"><span
+                                                class="fa fa-edit (alias)"></span></a>
+
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger btn_modal_hapus" type="button"
+                                            data-url="{{ route('pegawai.destroy', $tampil->id) }}"><span
+                                                class="fa fa-trash"></span></button>
+                                    </td>
+                                @endcan
+
+
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

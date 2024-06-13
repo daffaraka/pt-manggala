@@ -21,11 +21,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PegawaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['role:Admin|Spv', 'permission:pegawai-beranda']);
+    }
     public function index()
     {
         $pegawai = Pegawai::orderBy('nama', 'asc');
@@ -35,7 +34,7 @@ class PegawaiController extends Controller
         if (request()->nip) {
             $pegawai = $pegawai->where('nip', 'like', '%' . request()->nip . '%');
         }
-        $limit = 5;
+        $limit = 10;
         if (request()->limit) {
             $limit = request()->limit;
         }
@@ -197,58 +196,76 @@ class PegawaiController extends Controller
     {
         // $pegawai = Pegawai::update($request->all());
 
+
         $requestFileFoto = $request->file('foto');
         $requestFile1 = $request->file('dokumen_satu');
         $requestFile2 = $request->file('dokumen_dua');
         $requestFile3 = $request->file('dokumen_tiga');
 
-        $fileFoto = $request->file('foto')->getClientOriginalName();
-        $fileDokumen1 = $request->file('dokumen_satu')->getClientOriginalName();
-        $fileDokumen2 = $request->file('dokumen_dua')->getClientOriginalName();
-        $fileDokumen3 = $request->file('dokumen_tiga')->getClientOriginalName();
-
-
-        $fileFotoSaved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileFoto;
-        $fileDok1Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen1;
-        $fileDok2Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen2;
-        $fileDok3Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen3;
-
-
 
         if ($requestFileFoto) {
-            if (File::exists('berkas/pegawai/foto', $fileFotoSaved)) {
-                File::delete('berkas/pegawai/foto', $fileFotoSaved);
-                $requestFileFoto->move('berkas/pegawai/foto', $fileFotoSaved);
+            $fileFoto = $request->file('foto')->getClientOriginalName();
+            $fileFotoSaved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileFoto;
+
+            if (File::exists('berkas/pegawai/foto/' . $pegawai->foto)) {
+                File::delete('berkas/pegawai/foto/' . $pegawai->foto);
+                $requestFileFoto->move('berkas/pegawai/foto/', $fileFotoSaved);
             } else {
-                $requestFileFoto->move('berkas/pegawai/foto', $fileFotoSaved);
+                $requestFileFoto->move('berkas/pegawai/foto/', $fileFotoSaved);
             }
+        } else {
+            $fileFotoSaved = $pegawai->foto;
         }
+
 
         if ($requestFile1) {
-            if (File::exists('berkas/pegawai/foto', $fileDok1Saved)) {
-                File::delete('berkas/pegawai/foto', $fileDok1Saved);
-                $requestFile1->move('berkas/pegawai/foto', $fileDok1Saved);
-            } else {
-                $requestFile1->move('berkas/pegawai/foto', $fileDok1Saved);
+            $fileDokumen1 = $request->file('dokumen_satu')->getClientOriginalName();
+            $fileDok1Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen1;
+            if ($requestFile1) {
+                if (File::exists('berkas/pegawai/dokumen_satu/' . $pegawai->dokumen_satu)) {
+                    File::delete('berkas/pegawai/dokumen_satu/' . $pegawai->dokumen_satu);
+                    $requestFile1->move('berkas/pegawai/dokumen_satu/', $fileDok1Saved);
+                } else {
+                    $requestFile1->move('berkas/pegawai/dokumen_satu/', $fileDok1Saved);
+                }
             }
-        }
-        if ($requestFile2) {
-            if (File::exists('berkas/pegawai/foto', $fileDok2Saved)) {
-                File::delete('berkas/pegawai/foto', $fileDok2Saved);
-                $requestFile2->move('berkas/pegawai/foto', $fileDok2Saved);
-            } else {
-                $requestFile2->move('berkas/pegawai/foto', $fileDok2Saved);
-            }
+        } else {
+            $fileDok1Saved = $pegawai->dokumen_dua;
         }
 
-        if ($requestFile3) {
-            if (File::exists('berkas/pegawai/foto', $fileDok3Saved)) {
-                File::delete('berkas/pegawai/foto', $fileDok3Saved);
-                $requestFile3->move('berkas/pegawai/foto', $fileDok3Saved);
-            } else {
-                $requestFile3->move('berkas/pegawai/foto', $fileDok3Saved);
+
+        if ($requestFile2) {
+            $fileDokumen2 = $request->file('dokumen_dua')->getClientOriginalName();
+            $fileDok2Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen2;
+
+            if ($requestFile2) {
+                if (File::exists('berkas/pegawai/dokumen_dua/', $pegawai->dokumen_dua)) {
+                    File::delete('berkas/pegawai/dokumen_dua/', $pegawai->dokumen_dua);
+                    $requestFile2->move('berkas/pegawai/dokumen_dua/', $fileDok2Saved);
+                } else {
+                    $requestFile2->move('berkas/pegawai/dokumen_dua/', $fileDok2Saved);
+                }
             }
+        } else {
+            $fileDok2Saved = $pegawai->dokumen_dua;
         }
+
+
+        if ($requestFile3) {
+            $fileDokumen3 = $request->file('dokumen_tiga')->getClientOriginalName();
+            $fileDok3Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen3;
+            if ($requestFile3) {
+                if (File::exists('berkas/pegawai/dokumen_tiga/', $pegawai->dokumen_tiga)) {
+                    File::delete('berkas/pegawai/dokumen_tiga/', $pegawai->dokumen_tiga);
+                    $requestFile3->move('berkas/pegawai/dokumen_tiga/', $fileDok3Saved);
+                } else {
+                    $requestFile3->move('berkas/pegawai/dokumen_tiga/', $fileDok3Saved);
+                }
+            }
+        } else {
+            $fileDok3Saved = $pegawai->dokumen_tiga;
+        }
+
 
 
         $pegawai->nip = $request->nip;
@@ -282,12 +299,6 @@ class PegawaiController extends Controller
         $pegawai->dokumen_tiga = $fileDok3Saved;
         $pegawai->norek = $request->norek;
         $pegawai->namabank = $request->namabank;
-
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->move('dokumenpegawaitiga/', $request->file('foto')->getClientOriginalName());
-            $pegawai->foto = $request->file('foto')->getClientOriginalName();
-            $pegawai->save();
-        }
 
         $pegawai->save();
 

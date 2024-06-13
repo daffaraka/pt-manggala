@@ -19,7 +19,7 @@ class PegawaiSeeder extends Seeder
     {
         DB::table('pegawais')->delete();
 
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $faker = Faker::create('id_ID');
             $gender = $faker->randomElement(['Laki-laki', 'Perempuan']);
             $data = new Pegawai();
@@ -30,10 +30,10 @@ class PegawaiSeeder extends Seeder
             $data->tgl_lahir = $faker->date();
             $data->nohp = $faker->phoneNumber();
             $data->alamat = $faker->address();
-            $data->agama_id = $faker->randomElement(['1', '2','3','4']);
-            $data->negara_id = $faker->randomElement(['1', '2','3','4']);
-            $data->gol_darah_id = $faker->randomElement(['1', '2','3','4']);
-            $data->skeluarga_id = $faker->randomElement(['1', '2','3','4']);
+            $data->agama_id = $faker->randomElement(['1', '2', '3', '4']);
+            $data->negara_id = $faker->randomElement(['1', '2', '3', '4']);
+            $data->gol_darah_id = $faker->randomElement(['1', '2', '3', '4']);
+            $data->skeluarga_id = $faker->randomElement(['1', '2', '3', '4']);
             $data->save();
         }
     }

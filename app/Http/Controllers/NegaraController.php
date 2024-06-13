@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 class NegaraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('role:Admin|SPV');    }
     public function index()
     {
         $negara = Negara::all();

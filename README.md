@@ -9,8 +9,6 @@ Sistem Informasi Kepegawaian Sederhana menggunakan Laravel 9
 6. Konfirmasi Hapus
 7. Perbaikan bug
 
-## Demo
-Address : http://13.250.112.156/
 ## Requirement
 - PHP >= 8.1
 - Composer
