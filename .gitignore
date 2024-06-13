@@ -2,7 +2,9 @@
 /public/build
 /public/hot
 /public/storage
-/public/*
+/public/berkas
+/public/dokumenpegawaitiga
+/public/dokumensatu
 /storage/*.key
 /vendor
 .env
