@@ -23,7 +23,7 @@ class PegawaiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Admin|SPV', 'permission:pegawai-beranda']);
+        $this->middleware(['role:Admin|SPV']);
     }
     public function index()
     {

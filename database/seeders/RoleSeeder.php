@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Spv']);
+        Role::create(['name' => 'SPV']);
         Role::create(['name' => 'User']);
 
 
@@ -54,7 +54,6 @@ class RoleSeeder extends Seeder
         $SpvPermissions =
         [
             'dashboard-beranda',
-
             'pegawai-beranda',
 
             'agama-beranda',
