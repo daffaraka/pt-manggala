@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Penempatan;
+use App\Models\StatusAktiv;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PenempatanSeeder extends Seeder
+class StatusAktifSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class PenempatanSeeder extends Seeder
      */
     public function run()
     {
-        $Penempatan = ['BAS','SLR','BP','GAM', 'PWK'];
-        foreach ($Penempatan as $key => $value) {
-            $data = new Penempatan();
+        $poh = ['Aktif', 'Tidak Aktif'];
+        foreach ($poh as $key => $value) {
+            $data = new StatusAktiv();
             $data->nama = $value;
             $data->save();
         }

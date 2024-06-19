@@ -25,21 +25,21 @@ class UserSeeder extends Seeder
         $admin->assignRole('Admin');
 
 
-        $admin = User::create([
+        $spv = User::create([
             'name' => 'SPV',
             'username' => 'spv',
             'email' => 'spv@gmail.com',
             'password' => Hash::make('password'),
         ]);
-        $admin->assignRole('SPV');
+        $spv->assignRole('SPV');
 
 
-        $admin = User::create([
+        $user = User::create([
             'name' => 'User',
             'username' => 'user',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
         ]);
-        $admin->assignRole('Admin');
+        $user->assignRole('User');
     }
 }

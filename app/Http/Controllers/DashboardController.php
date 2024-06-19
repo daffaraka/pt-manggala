@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Keluarga;
-use App\Models\Pegawai;
+use App\Models\Poh;
 use App\Models\User;
+use App\Models\Pegawai;
+use App\Models\Golongan;
+use App\Models\Keluarga;
+use App\Models\Department;
+use App\Models\Penempatan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -25,10 +29,55 @@ class DashboardController extends Controller
             array_push($status_val, Pegawai::whereSkeluargaId($value->kdstatusk)->count());
         }
 
+
+        $data['karyawan_perSite'] = Pegawai::with(['penempatans'])->get()->groupBy(function ($item) {
+            return $item->penempatans->nama;
+        })
+            ->map(function ($statupenempatans, $statusName) {
+                return [
+                    'label' => $statusName,
+                    'count' => $statupenempatans->count(),
+                ];
+            });
+
+
+        $data['karyawan_perGolongan'] = Pegawai::with(['golongans'])->get()->groupBy(function ($item) {
+            return $item->golongans->nama;
+        })
+            ->map(function ($golonganenempatans, $golonganName) {
+                return [
+                    'label' => $golonganName,
+                    'count' => $golonganenempatans->count(),
+                ];
+            });
+
+
+        $data['karyawan_perStatus'] = Pegawai::with(['statusaktivs'])->get()->groupBy(function ($item) {
+            return $item->statusaktivs->nama;
+        })
+            ->map(function ($statusaktivs, $statusName) {
+                return [
+                    'label' => $statusName,
+                    'count' => $statusaktivs->count(),
+                ];
+            });
+
+
+
+        $data['persentase_departement'] = Penempatan::with('pegawais.departments')->get()->mapWithKeys(function ($penempatan) {
+            // Menghitung jumlah pegawais per department dalam penempatan
+            $departmentCounts = $penempatan->pegawais->groupBy('departments.nama')->map(function ($group) {
+                return $group->count();
+            })->toArray();
+
+            return [$penempatan->nama => $departmentCounts];
+        });
+
+
         // dd($status_val);
         $data['status_lbl'] = $status_lbl;
         $data['status_val'] = $status_val;
-        
+
         return view('dashboard', $data);
     }
 
@@ -47,13 +96,13 @@ class DashboardController extends Controller
 
             array_push($status_dept, $value->id_dept);
         }
-        
+
         // dd($data);
         $data['status_lbl'] = $status_lbl;
         $data['status_val'] = $status_val;
 
         $data['status_dept'] = $status_dept;
-        
+
         return view('chart', $data);
     }
 }

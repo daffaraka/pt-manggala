@@ -20,8 +20,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if (isset($pegawai->foto))
-                            <img src="{{ asset('berkas/pegawai/foto/' . $pegawai->foto) }}" class="shadow" width="auto" height="260px"
-                                alt="">
+                            <img src="{{ asset('berkas/pegawai/foto/' . $pegawai->foto) }}" class="shadow" width="auto"
+                                height="260px" alt="">
                         @else
                             <img src="{{ asset('img/kimi.jpg') }}" width="180px" height="260" alt="">
                         @endif
@@ -125,43 +125,15 @@
                             <td>:</td>
                             <td>{{ $pegawai->nik }}</td>
                             </tr>
-                            {{-- </tr>
-					<td> Departemnt</td>
-					<td>:</td>
-					<td>{{$pegawai->departments->ndept ?? ""}}</td>
-				</tr>    --}}
-                            {{-- </tr>
-					<td> Nomor HP</td>
-					<td>:</td>
-					<td>{{$pegawai->tgl_keluar}}</td>
-				</tr>
-				</tr>
-					<td> Nomor HP</td>
-					<td>:</td>
-					<td>{{$pegawai->tgl_keluar}}</td>
-				</tr>
-				</tr>
-					<td> Nomor HP</td>
-					<td>:</td>
-					<td>{{$pegawai->tgl_keluar}}</td>
-				</tr>
-				</tr>
-					<td> Nomor HP</td>
-					<td>:</td>
-					<td>{{$pegawai->tgl_keluar}}</td>
-				</tr>
-				</tr>
-					<td> Nomor HP</td>
-					<td>:</td>
-					<td>{{$pegawai->tgl_keluar}}</td>
-				</tr>                                --}}
+
                         </table>
                     </div>
                 </div>
             </div>
         </div>
         <a href="{{ url('/pegawai/' . $pegawai->id . '/pelatihan') }}" class="btn btn-primary"><span> Pelatihan</span></a>
-        <a href="{{ url('/pegawai/' . $pegawai->id . '/pendidikan') }}" class="btn btn-primary"><span> Pendidikan</span></a>
+        <a href="{{ url('/pegawai/' . $pegawai->id . '/pendidikan') }}" class="btn btn-primary"><span>
+                Pendidikan</span></a>
         <a href="{{ url('/pegawai/' . $pegawai->id . '/pengalaman') }}" class="btn btn-primary"><span> Pengalaman
                 Kerja</span></a>
     </main>

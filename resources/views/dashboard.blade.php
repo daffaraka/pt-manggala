@@ -26,10 +26,118 @@
                         User information
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ Auth::user()->name }} - <button
+                        <h5 class="card-title">{{ Auth::user()->nama }} - <button
                                 class="btn btn-sm btn-info">{{ Auth::user()->roles->first()->name }} </button> </h5>
-                            <hr>
+                        <hr>
                         <p class="card-text font-weight-bold">{{ Auth::user()->email }}</p>
+                        @if (isset(Auth::user()->foto))
+                            <img src="{{ asset('berkas/pegawai/foto/' . Auth::user()->foto) }}" class="shadow" width="auto"
+                                height="260px" alt="">
+                        @else
+                            <img src="{{ asset('img/kimi.jpg') }}" width="180px" height="260" alt="">
+                        @endif
+                        <table class="table-condensed table-bordered  my-4">
+                            <tr>
+                                <td>NIP</td>
+                                <td>:</td>
+                                <td>{{ Auth::user()->nip }}</td>
+                            </tr>
+                            <tr>
+                                <td>Nama</td>
+                                <td>: </td>
+                                <td>{{ Auth::user()->nama }}</td>
+                            </tr>
+                            <tr>
+                                <td> Tempat, Tanggal Lahir</td>
+                                <td>:</td>
+                                <td>{{ Auth::user()->tmpt_lahir }}, {{ Auth::user()->tgl_lahir }}</td>
+                            </tr>
+                            <tr>
+                                <td> Jenis Kelamin</td>
+                                <td>:</td>
+                                <td>{{ Auth::user()->jenis_kelamin }}</td>
+                            </tr>
+                            <tr>
+                                <td> Alamat</td>
+                                <td>:</td>
+                                <td>{{ Auth::user()->alamat }}</td>
+                            </tr>
+                            <tr>
+                                <td> Agama</td>
+                                <td>:</td>
+                                <td>{{ Auth::user()->agama->nmagama ?? '' }}</td>
+                            </tr>
+                            <td> Kewarganegaraan</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->negara->nm_negara ?? '' }}</td>
+                            </tr>
+                            </tr>
+                            <td> Golongan Darah</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->darah->nama_gol_darah ?? '' }}</td>
+                            </tr>
+                            </tr>
+                            <td> Status</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->keluarga->nmstatusk ?? '' }}</td>
+                            </tr>
+                            </tr>
+                            <td> Nomor HP</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->nohp }}</td>
+                            </tr>
+                            </tr>
+                            <td> Nomor HP</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->nik }}</td>
+                            </tr>
+                            </tr>
+                            <td> Desa</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->desa }}</td>
+                            </tr>
+                            </tr>
+                            <td> Kecamatan</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->kecamatan }}</td>
+                            </tr>
+                            </tr>
+                            <td> Kabupaten</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->kabupaten }}</td>
+                            </tr>
+                            </tr>
+                            <td> Tanggal Masuk</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->tgl_masuk }}</td>
+                            </tr>
+                            </tr>
+                            <td> Tanggal Keluar</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->tgl_keluar }}</td>
+                            </tr>
+                            </tr>
+                            <td> Catatan Keluar</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->note_keluar }}</td>
+                            </tr>
+                            </tr>
+                            <td> Nomor Rekening</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->norek }}</td>
+                            </tr>
+                            </tr>
+                            <td> Nomor Bank</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->namabank }}</td>
+                            </tr>
+                            </tr>
+                            <td> NIK</td>
+                            <td>:</td>
+                            <td>{{ Auth::user()->nik }}</td>
+                            </tr>
+
+                        </table>
                     </div>
                 </div>
             </div>
@@ -108,16 +216,7 @@
                 </div>
             </div>
         @endrole
-        {{-- <div class="row"> --}}
 
-        {{-- <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-            <div class="info">
-              <h4>User</h4>
-              <p><b>{{ $user }}</b></p>
-            </div>
-          </div>
-        </div> --}}
         <div class="row">
             <div class="col-md-6">
                 <div class="tile">
@@ -131,29 +230,314 @@
             <div class="col-md-6">
                 <div class="tile">
                     <h3 class="tile-title">Pegawai Berdasarkan Jenis Kelamin</h3>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
+                    <div class="embed-responsive embed-responsive-16by9 ">
+                        <canvas class="embed-responsive-item align-items-center" width="400" height="200"
+                            id="pieChartDemo"></canvas>
+
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">Pegawai Berdasarkan Department</h3>
+                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiDepartment"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">Pegawai Berdasarkan Per Site</h3>
+                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiPerSite"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">Pegawai Berdasarkan Golongan</h3>
+                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiGolongan"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tile">
+                    <h3 class="tile-title">Pegawai Berdasarkan Status</h3>
+                    <canvas class="embed-responsive-item" width="400" height="400" id="myChart"></canvas>
+                </div>
+            </div>
+
         </div>
     @endsection
+
+
     @section('script')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <script type="text/javascript">
+            // Perstatus
+            var statusData = {!! json_encode($karyawan_perStatus) !!};
+            var dataAktif = statusData['Aktif']['count'];
+            var dataTidakAktif = statusData['Tidak Aktif']['count'];
+            var statusCtx = document.getElementById('myChart').getContext('2d');
+            var pegawaiStatusChart = new Chart(statusCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pegawai status'], // Label status
+                    datasets: [{
+                            label: 'Aktif',
+                            data: [dataAktif],
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)', // Warna latar belakang
+                        },
+                        {
+                            label: 'Tidak aktif',
+                            data: [dataTidakAktif],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)', // Warna latar belakang
+                        },
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            categoryPercentage: 0.5, // Mengatur kategori lebar
+                            barPercentage: 0.5,
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 50, // Sesuaikan dengan skala yang diinginkan
+                            ticks: {
+                                stepSize: 10,
+                            },
+                            grid: {
+                                display: true,
+                            },
+
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+
+            });
+
+            // PerSite
+            var siteData = {!! json_encode($karyawan_perSite) !!};
+            var BAS = siteData['BAS']['count'];
+            var PWK = siteData['PWK']['count'];
+            var BP = siteData['BP']['count'];
+            var SLR = siteData['SLR']['count'];
+            var GAM = siteData['GAM']['count'];
+            var siteCtx = document.getElementById('pegawaiPerSite').getContext('2d');
+            var pegawaiSiteChart = new Chart(siteCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pembagian pegawai berdasarkan site'], // Label status
+                    datasets: [{
+                            label: 'BAS',
+                            data: [BAS],
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)', // Warna latar belakang
+                        },
+                        {
+                            label: 'PWK',
+                            data: [PWK],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)', // Warna latar belakang
+                        },
+                        {
+                            label: 'BP',
+                            data: [BP],
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)', // Warna latar belakang
+                        },
+                        {
+                            label: 'SLR',
+                            data: [SLR],
+                            backgroundColor: 'rgba(153, 102, 255, 0.5)', // Warna latar belakang
+                        },
+                        {
+                            label: 'GAM',
+                            data: [GAM],
+                            backgroundColor: 'rgba(255, 159, 64, 0.5)', // Warna latar belakang
+                        },
+                    ]
+                },
+                options: {
+
+                    scales: {
+                        x: {
+                            categoryPercentage: 30, // Mengatur kategori lebar
+                            barPercentage: 30,
+                        },
+
+                        y: {
+                            beginAtZero: true,
+                            max: 20, // Sesuaikan dengan skala yang diinginkan
+                            ticks: {
+                                stepSize: 5,
+                            },
+                            grid: {
+                                display: true,
+                            },
+
+                        },
+                    },
+
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+
+            });
+
+
+            // Per Departemen
+            var departmentData = {!! json_encode($persentase_departement) !!};
+            var departmentCtx = document.getElementById('pegawaiDepartment').getContext('2d');
+
+            // Menentukan semua departemen yang mungkin
+            var allDepartments = [];
+            Object.values(departmentData).forEach(departments => {
+                allDepartments = [...new Set([...allDepartments, ...Object.keys(departments)])];
+            });
+
+            // Warna-warna untuk setiap departemen
+            var colors = [
+                'rgba(255, 99, 132, 0.5)', // Warna Golongan I
+                'rgba(54, 162, 235, 0.5)', // Warna Golongan II
+                'rgba(75, 192, 192, 0.5)', // Warna Golongan III
+                'rgba(153, 102, 255, 0.5)', // Warna Golongan IV
+                'rgba(255, 159, 64, 0.5)', // Warna Golongan V
+                'rgba(255, 205, 86, 0.5)', // Warna Golongan VI
+                'rgba(201, 203, 207, 0.5)', // Warna Golongan VII
+                'rgba(39, 174, 96, 0.5)' // Warna Golongan Eksekutif
+            ];
+
+            // Menghasilkan dataset untuk setiap departemen
+            var datasets = allDepartments.map((department, index) => {
+                return {
+                    label: department,
+                    data: Object.values(departmentData).map(item => item[department] || 0),
+                    backgroundColor: colors[index % colors.length], // Menggunakan warna yang telah ditentukan
+                };
+            });
+
+            var pegawaiDepartmentChart = new Chart(departmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(departmentData), // Label penempatan
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        x: {
+                            stacked: true,
+                            categoryPercentage: 0.6, // Mengatur kategori lebar
+                            barPercentage: 0.9,
+                            grid: {
+                                display: false,
+                            },
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            max: 20, // Sesuaikan dengan skala yang diinginkan
+                            ticks: {
+                                stepSize: 5,
+                            },
+                            grid: {
+                                display: true,
+                            },
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            });
+
+
+            // Pergolongan - Donut
+            var golonganData = {!! json_encode($karyawan_perGolongan) !!};
+            var gol1 = golonganData['I']['count'];
+            var gol2 = golonganData['II']['count'];
+            var gol3 = golonganData['III']['count'];
+            var gol4 = golonganData['IV']['count'];
+            var gol5 = golonganData['V']['count'];
+            var gol6 = golonganData['VI']['count'];
+            var gol7 = golonganData['VII']['count'];
+            var golEksekutif = golonganData['Eksekutif']['count'];
+            var golonganCtx = document.getElementById('pegawaiGolongan').getContext('2d');
+            var pegawaiGolonganChart = new Chart(golonganCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Golongan I', 'Golongan II', 'Golongan III', 'Golongan IV', 'Golongan V', 'Golongan VI',
+                        'Golongan VII', 'Golongan Eksekutif'
+                    ], // Label status
+                    datasets: [{
+                        data: [gol1, gol2, gol3, gol4, gol5, gol6, gol7, golEksekutif],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)', // Warna Golongan I
+                            'rgba(54, 162, 235, 0.5)', // Warna Golongan II
+                            'rgba(75, 192, 192, 0.5)', // Warna Golongan III
+                            'rgba(153, 102, 255, 0.5)', // Warna Golongan IV
+                            'rgba(255, 159, 64, 0.5)', // Warna Golongan V
+                            'rgba(255, 205, 86, 0.5)', // Warna Golongan VI
+                            'rgba(201, 203, 207, 0.5)', // Warna Golongan VII
+                            'rgba(39, 174, 96, 0.5)' // Warna Golongan Eksekutif
+                        ],
+                    }],
+                },
+
+                options: {
+
+                    scales: {
+                        x: {
+                            categoryPercentage: 30, // Mengatur kategori lebar
+                            barPercentage: 30,
+                        },
+
+                        y: {
+                            beginAtZero: true,
+                            max: 15, // Sesuaikan dengan skala yang diinginkan
+                            ticks: {
+                                stepSize: 2,
+                            },
+                            grid: {
+                                display: true,
+                            },
+
+                        },
+                    },
+
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+
+            });
+
+
+
             var data = {
                 labels: {!! json_encode($status_lbl) !!},
                 datasets: [{
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {{ json_encode($status_val) }},
-                    label: "Sudah Menikah"
-                }, ]
+                    label: "Sudah Menikah",
+                    backgroundColor: "rgba(220,220,220,0.5)",
+                    borderColor: "#000",
+                    pointBackgroundColor: "rgba(220,220,220,1)",
+                    pointBorderColor: "#000",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    data: {!! json_encode($status_val) !!}
+                }]
             };
+
             var pdata = [{
                     value: {{ $pgw_lk }},
                     color: "#46BFBD",
@@ -166,11 +550,38 @@
                     highlight: "#FF5A5E",
                     label: "Perempuan"
                 }
-            ]
+            ];
 
-            var ctxb = $("#barChartDemo").get(0).getContext("2d");
-            var barChart = new Chart(ctxb).Bar(data);
-            var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-            var pieChart = new Chart(ctxp).Pie(pdata);
+            // Bar Chart
+            var ctxb = document.getElementById('barChartDemo').getContext('2d');
+            var barChart = new Chart(ctxb, {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart
+            var ctxp = document.getElementById('pieChartDemo').getContext('2d');
+            var pieData = {
+                labels: pdata.map(item => item.label),
+                datasets: [{
+                    data: pdata.map(item => item.value),
+                    backgroundColor: pdata.map(item => item.color),
+                    hoverBackgroundColor: pdata.map(item => item.highlight)
+                }]
+            };
+            var pieChart = new Chart(ctxp, {
+                type: 'pie',
+                data: pieData
+            });
         </script>
     @endsection

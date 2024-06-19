@@ -4,7 +4,6 @@
 /public/storage
 /public/berkas
 /public/dokumenpegawaitiga
-/public/dokumensatu
 /storage/*.key
 /vendor
 .env

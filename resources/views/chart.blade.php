@@ -130,8 +130,8 @@ Chart
           </div>
         </div>
       </div>
-          
-          
+
+
 
 
 
@@ -144,7 +144,7 @@ Chart
               </div>
             </div>
         </div> --}}
-        
+
     </main>
     </main>
 @endsection
@@ -199,10 +199,10 @@ Chart
       		},
       	]
       };
-      
-      
+
+
       var ctxb = $("#barChartDemo").get(0).getContext("2d");
-      var barChart = new Chart(ctxb).Bar(data);      
+      var barChart = new Chart(ctxb).Bar(data);
       var ctxp = $("#pieChartDemo").get(0).getContext("2d");
       var pieChart = new Chart(ctxp).Pie(pdata);
 

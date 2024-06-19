@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Penempatan;
+use App\Models\Poh;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PenempatanSeeder extends Seeder
+class PoHSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class PenempatanSeeder extends Seeder
      */
     public function run()
     {
-        $Penempatan = ['BAS','SLR','BP','GAM', 'PWK'];
-        foreach ($Penempatan as $key => $value) {
-            $data = new Penempatan();
+        $poh = ['Palembang','Tangerang','Muara Enim','Lahat', 'Jakarta','Samarinda','Serpong'];
+        foreach ($poh as $key => $value) {
+            $data = new Poh();
             $data->nama = $value;
             $data->save();
         }

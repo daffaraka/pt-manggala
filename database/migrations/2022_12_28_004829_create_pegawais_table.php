@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('username')->unique();
+            $table->string('email')->nullable()->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->string('nip', 100)->unique();
             $table->string('nama', 100);
             $table->string('tmpt_lahir', 40);
@@ -27,9 +32,18 @@ return new class extends Migration
             $table->smallInteger('negara_id')->nullable();
             $table->smallInteger('gol_darah_id')->nullable();
             $table->smallInteger('skeluarga_id')->nullable();
+            $table->bigInteger('id_penempatan')->nullable();
+            $table->bigInteger('id_poh')->nullable();
+            $table->bigInteger('id_dept')->nullable();
+            $table->bigInteger('id_golongan')->nullable();
+            $table->bigInteger('id_jeniskeluar')->nullable();
+            $table->bigInteger('id_statusaktiv')->nullable();
+            $table->string('dokumen_satu', 100)->nullable()->nullable();
+            $table->string('dokumen_dua', 100)->nullable()->nullable();
+            $table->string('dokumen_tiga', 100)->nullable()->nullable();
             $table->timestamps();
 
-            
+
         });
     }
 

@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Penempatan extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_penempatans';
+
+
+    /**
+     * Get all of the pegawai for the Penempatan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class,'id_penempatan');
+    }
 }

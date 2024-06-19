@@ -315,10 +315,10 @@
                             <div class="col-md-8">
                                 <input class="form-control col-md-8" type="file" accept="application/pdf"
                                     name="dokumen_satu" value="{{ isset($pegawai) ? $pegawai->dokumen_satu : '' }}">
-                                {{-- @if (isset($pegawai) && $pegawai->dokumen_satu) --}}
-                                <a href="{{ asset('berkas/pegawai/dokumen_satu/' . $pegawai->dokumen_satu) }}"
-                                    class="btn btn-primary mt-2">Lihat Dokumen</a>
-                                {{-- @endif --}}
+                                @if (isset($pegawai) && $pegawai->dokumen_satu)
+                                    <a href="{{ asset('berkas/pegawai/dokumen_satu/' . $pegawai->dokumen_satu) }}"
+                                        class="btn btn-primary mt-2">Lihat Dokumen</a>
+                                @endif
                             </div>
                         </div>
 
@@ -327,8 +327,10 @@
                             <div class="col-md-8">
                                 <input class="form-control col-md-8" type="file" accept="application/pdf"
                                     name="dokumen_dua" value="{{ isset($pegawai) ? $pegawai->dokumen_dua : '' }}">
-                                <a href="{{ asset('berkas/pegawai/dokumen_dua/' . $pegawai->dokumen_dua) }}"
-                                    class="btn btn-primary mt-2">Lihat Dokumen</a>
+                                @if (isset($pegawai) && $pegawai->dokumen_dua)
+                                    <a href="{{ asset('berkas/pegawai/dokumen_dua/' . $pegawai->dokumen_dua) }}"
+                                        class="btn btn-primary mt-2">Lihat Dokumen</a>
+                                @endif
                             </div>
                         </div>
 
@@ -338,8 +340,10 @@
                             <div class="col-md-8">
                                 <input class="form-control col-md-8" type="file" accept="application/pdf"
                                     name="dokumen_tiga" value="{{ isset($pegawai) ? $pegawai->dokumen_tiga : '' }}">
-                                <a href="{{ asset('berkas/pegawai/dokumen_tiga/' . $pegawai->dokumen_tiga) }}"
-                                    class="btn btn-primary mt-2">Lihat Dokumen</a>
+                                @if (isset($pegawai) && $pegawai->dokumen_tiga)
+                                    <a href="{{ asset('berkas/pegawai/dokumen_tiga/' . $pegawai->dokumen_tiga) }}"
+                                        class="btn btn-primary mt-2">Lihat Dokumen</a>
+                                @endif
                             </div>
                         </div>
 
@@ -348,6 +352,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3">No Rekening</label>
                             <div class="col-md-8">
+
                                 <input class="form-control col-md-8" type="number" name="norek"
                                     value="{{ isset($pegawai) ? $pegawai->norek : '' }}">
                             </div>

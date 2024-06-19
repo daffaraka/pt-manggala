@@ -9,5 +9,10 @@ class Agama extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_agm';
+    protected $primarykey = 'id_agm';
+
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class,'agama_id');
+    }
 }

@@ -100,8 +100,8 @@
                                         </td>
                                         <td>{{ $tampil->nip }}</td>
                                         <td>
-                                            @if ($tampil->nama == Auth::user()->name)
-                                                <a href="{{ route('pegawai.show', $tampil->id) }}">{{ $tampil->nama }}</a>
+                                            @if ($tampil->nip == Auth::user()->nip)
+                                                <a href="{{ route('pegawai.show', $tampil->id) }}" class="btn btn-info">{{ $tampil->nama }}</a>
                                         </td>
                                     @else
                                         <p>{{ $tampil->nama }}</p>
@@ -112,7 +112,7 @@
                                 <td>{{ $tampil->jenis_kelamin }}</td>
                                 <td>{{ $tampil->nohp }}</td>
 
-                                @can(['pegawai-edit','pegawai-hapus'])
+                                @can(['pegawai-edit', 'pegawai-hapus'])
                                     <td>
                                         <a href="{{ url('/pegawai/' . $tampil->id . '/edit') }}" class="btn btn-info"><span
                                                 class="fa fa-edit (alias)"></span></a>

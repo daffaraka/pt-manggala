@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Pegawai;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Lockout;
@@ -20,7 +21,7 @@ class LoginRequest extends FormRequest
         $this->loginValue = $this->input('login');
         $this->merge([$this->loginField => $this->loginValue]);
     }
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -65,7 +66,7 @@ class LoginRequest extends FormRequest
             ]);
         }*/
 
-        $user = User::where('email', $this->login)
+        $user = Pegawai::where('email', $this->login)
             ->orWhere('name', $this->login)
             ->first();
 

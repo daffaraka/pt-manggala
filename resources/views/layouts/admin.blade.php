@@ -125,9 +125,8 @@
     <script src="{{ asset('template/docs/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/docs/js/main.js') }}"></script>
     <script src="{{ asset('template/docs/js/plugins/pace.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/docs/js/plugins/chart.js') }}"></script>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script> {{-- chart buatan sendiri --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{ asset('toast') }}//toastr.min.css">
     <script src="{{ asset('toast') }}/toastr.min.js"></script>
 

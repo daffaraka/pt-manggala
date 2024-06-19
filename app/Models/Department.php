@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_dept';
-    // public function pegawais()
-    // {
-    //     return $this->hasMany(Pegawai::class, 'id_dept');
-    // }
+    protected $primaryKey = 'id';
+
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class, 'id_dept','id');
+    }
 }

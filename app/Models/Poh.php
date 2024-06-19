@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Poh extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_poh';
+
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class);
+    }
 }
