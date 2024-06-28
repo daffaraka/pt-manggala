@@ -16,8 +16,10 @@ use App\Models\StatusAktiv;
 use Illuminate\Http\Request;
 use App\Models\GolonganDarah;
 use App\Exports\PegawaiExport;
+use App\Imports\PegawaiImport;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -390,5 +392,30 @@ class PegawaiController extends Controller
         }
 
         return redirect()->route('tampildokumensatu', $pegawai->id)->with('success', 'dokumen satu berhasil dihapus');
+    }
+
+    public function importData(Request $request)
+    {
+        $this->validate($request,[
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        $file = $request->file('file');
+
+        $nama_file = $file->hashName();
+
+        $path = $file->storeAs('public/excel/',$nama_file);
+
+        $import = Excel::import(new PegawaiImport(), storage_path('app/public/excel/'.$nama_file));
+
+        Storage::delete($path);
+
+        if($import) {
+            //redirect
+            return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
+        } else {
+            //redirect
+            return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
+        }
     }
 }

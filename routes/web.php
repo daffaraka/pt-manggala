@@ -35,55 +35,60 @@ use App\Http\Controllers\GolonganDarahController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-  
-    Route::get('/', [DashboardController::class,'index']);
-    Route::get('pegawai/pdf', [PegawaiController::class,'pdf'])->name('pegawai-pdf');
-    Route::resource('pegawai', PegawaiController::class);    
+
+    Route::get('pegawai/pdf', [PegawaiController::class, 'pdf'])->name('pegawai-pdf');
+    Route::resource('pegawai', PegawaiController::class);
     Route::resource('pendidikan', PendidikanController::class);
     Route::resource('pelatihan', PelatihanController::class);
-    Route::resource('pengalaman', PengalamanController::class);    
+    Route::resource('pengalaman', PengalamanController::class);
     Route::resource('agama', AgamaController::class);
     Route::resource('negara', NegaraController::class);
     Route::resource('darah', GolonganDarahController::class);
     Route::resource('keluarga', KeluargaController::class);
-    Route::get('chart', [DashboardController::class,'chart']);
-    Route::get('pegawai/pelatihan/{id}',[PelatihanController::class,'pel']);
+    Route::get('chart', [DashboardController::class, 'chart']);
+    Route::get('pegawai/pelatihan/{id}', [PelatihanController::class, 'pel']);
     Route::resource('pegawai.pelatihan', PelatihanController::class);
-    Route::get('pegawai/pendidikan/{id}',[PendidikanController::class,'pel']);
+    Route::get('pegawai/pendidikan/{id}', [PendidikanController::class, 'pel']);
     Route::resource('pegawai.pendidikan', PendidikanController::class);
-    Route::get('pegawai/pengalaman/{id}',[PengalamanController::class,'pel']);
+    Route::get('pegawai/pengalaman/{id}', [PengalamanController::class, 'pel']);
     Route::resource('pegawai.pengalaman', PengalamanController::class);
-    Route::get('pegawai/pdf', [PegawaiController::class,'pdf'])->name('pegawai-pdf');
+    Route::get('pegawai/pdf', [PegawaiController::class, 'pdf'])->name('pegawai-pdf');
 
-    
-    Route::get('/exportexcel', [PegawaiController::class,'exportexcel'])->name('exportexcel');
+
+    Route::get('/export-excel', [PegawaiController::class, 'exportexcel'])->name('exportexcel');
+    Route::post('/import-excel', [PegawaiController::class, 'importData'])->name('importData');
     Route::get('/tampilfoto/{id}', [PegawaiController::class, 'tampilfoto'])->name('tampilfoto');
     Route::post('/hapusfoto/{id}', [PegawaiController::class, 'hapusfoto'])->name('hapusfoto');
     // Route::get('/tampildokumensatu/{id}', [PegawaiController::class, 'tampildokumensatu'])->name('tampildokumensatu');
     // Route::post('/hapusdokumensatu/{id}', [PegawaiController::class, 'hapusdokumensatu'])->name('hapusdokumensatu');
 
-    
+
 
     // Route::resource('pegawai', PegawaiController::class);
     // Route::get('pegawai/{pegawai}/remove-file/{field}', [PegawaiController::class, 'removeFile'])->name('pegawai.removeFile');
 
 
-    
-    
+
+
 
 
     // Route::get('/homeku', [HomeController::class, 'index'])->name('homeku');
-    
+
 
 });
 
 
+Route::get('/', function() {
+   return to_route('homeku');
+});
 
 Route::get('/homeku', [HomeController::class, 'index'])->name('homeku');
 Route::get('/satumanggala', [SatuManggalaController::class, 'index'])->name('satumanggla');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

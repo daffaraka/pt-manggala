@@ -21,6 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('template/docs/css/main.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js">
+    </script>
+
 </head>
 
 <body class="app sidebar-mini rtl">
@@ -34,6 +37,9 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
                     aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li>
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">Edit Profile</a>
+                    </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -57,7 +63,7 @@
             </div>
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}"><i
+            <li><a class="app-menu__item {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i
                         class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
             @role('Admin')
@@ -103,19 +109,20 @@
                     </ul>
                 </li>
             @endcan
-            <li><a class="app-menu__item {{ request()->is('chart') ? 'active' : '' }}" href="{{ url('chart') }}"><i
-                        class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a>
-            </li>
+            @role(['Admin','Spv'])
+                <li><a class="app-menu__item {{ request()->is('chart') ? 'active' : '' }}" href="{{ url('chart') }}"><i
+                            class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a>
+                </li>
 
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Rekap Data</span><i
-                        class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="{{ route('pegawai-pdf') }}"><i
-                                class="icon fa fa-circle-o"></i> Pegawai</a></li>
-                </ul>
-            </li>
-
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                            class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Rekap Data</span><i
+                            class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="{{ route('pegawai-pdf') }}"><i
+                                    class="icon fa fa-circle-o"></i> Pegawai</a></li>
+                    </ul>
+                </li>
+            @endrole
 
         </ul>
     </aside>

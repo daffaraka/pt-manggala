@@ -63,6 +63,8 @@ class RoleSeeder extends Seeder
             'goldar-beranda',
 
             'keluarga-beranda',
+            'pegawai-hapus',
+
         ];
 
 

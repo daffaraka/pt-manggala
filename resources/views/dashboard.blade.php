@@ -31,8 +31,8 @@
                         <hr>
                         <p class="card-text font-weight-bold">{{ Auth::user()->email }}</p>
                         @if (isset(Auth::user()->foto))
-                            <img src="{{ asset('berkas/pegawai/foto/' . Auth::user()->foto) }}" class="shadow" width="auto"
-                                height="260px" alt="">
+                            <img src="{{ asset('berkas/pegawai/foto/' . Auth::user()->foto) }}" class="shadow"
+                                width="auto" height="260px" alt="">
                         @else
                             <img src="{{ asset('img/kimi.jpg') }}" width="180px" height="260" alt="">
                         @endif
@@ -48,9 +48,9 @@
                                 <td>{{ Auth::user()->nama }}</td>
                             </tr>
                             <tr>
-                                <td> Tempat, Tanggal Lahir</td>
+                                <td> Site</td>
                                 <td>:</td>
-                                <td>{{ Auth::user()->tmpt_lahir }}, {{ Auth::user()->tgl_lahir }}</td>
+                                <td>{{ Auth::user()->penempatans->nama }}</td>
                             </tr>
                             <tr>
                                 <td> Jenis Kelamin</td>
@@ -149,15 +149,18 @@
                     <div class="widget-small danger coloured-icon"><i class="icon fa fa-download fa-3x"></i>
                         <div class="info">
                             <h4>Export Excel</h4>
-                            <a href="/exportexcel">Export Excel</a>
+                            <a href="{{ route('exportexcel') }}" class="btn btn-info btn-sm"> Export Excel</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="widget-small danger coloured-icon"><i class="icon fa fa-upload fa-3x"></i>
                         <div class="info">
+                            <form action=""></form>
                             <h4>Import Data</h4>
-                            <p><b>{{ $user }}</b></p>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#import">
+                                Import Data
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -267,11 +270,42 @@
             </div>
 
         </div>
+
+
+
+        <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">IMPORT DATA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('importData') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>PILIH FILE</label>
+                                <input type="file" name="file" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                            <button type="submit" class="btn btn-info">IMPORT</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     @endsection
 
 
     @section('script')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js">
+        </script>
 
         <script type="text/javascript">
             // Perstatus
@@ -317,8 +351,18 @@
                         legend: {
                             position: 'bottom',
                         },
+                        datalabels: {
+                            anchor: 'center',
+                            align: 'start',
+                            formatter: function(value) {
+                                return value;
+                            },
+                            color: 'black',
+                        }
                     },
                 },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
+
 
             });
 
@@ -386,8 +430,17 @@
                         legend: {
                             position: 'bottom',
                         },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            formatter: function(value) {
+                                return value;
+                            }
+                        }
                     },
                 },
+
+                plugins: [ChartDataLabels], // Tambahkan plugin datalabels
 
             });
 
@@ -418,7 +471,7 @@
             var datasets = allDepartments.map((department, index) => {
                 return {
                     label: department,
-                    data: Object.values(departmentData).map(item => item[department] || 0),
+                    data: Object.values(departmentData).map(item => item[department]),
                     backgroundColor: colors[index % colors.length], // Menggunakan warna yang telah ditentukan
                 };
             });
@@ -455,8 +508,17 @@
                         legend: {
                             position: 'bottom',
                         },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            formatter: function(value) {
+                                return value;
+                            },
+                            color: 'black',
+                        }
                     },
                 },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
             });
 
 
@@ -517,8 +579,17 @@
                         legend: {
                             position: 'bottom',
                         },
+                        datalabels: {
+                            anchor: 'center',
+                            align: 'start',
+                            formatter: function(value) {
+                                return value;
+                            },
+                            color: 'black',
+                        }
                     },
                 },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
 
             });
 
@@ -565,8 +636,23 @@
                         y: {
                             beginAtZero: true
                         }
-                    }
-                }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        datalabels: {
+                            anchor: 'center',
+                            align: 'start',
+                            formatter: function(value) {
+                                return value;
+                            },
+                            color: 'black',
+                        }
+                    },
+                },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
+
             });
 
             // Pie Chart
@@ -581,7 +667,26 @@
             };
             var pieChart = new Chart(ctxp, {
                 type: 'pie',
-                data: pieData
+                data: pieData,
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        datalabels: {
+                            anchor: 'center',
+                            align: 'start',
+                            formatter: function(value) {
+                                return value;
+                            },
+                            color: 'black',
+                        }
+                    },
+                },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
+
+
+
             });
         </script>
     @endsection

@@ -32,11 +32,12 @@ class PegawaiSeeder extends Seeder
         $penempatan =Penempatan::pluck('id')->toArray();
 
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $faker = Faker::create('id_ID');
             $data = new Pegawai();
             $gender = $faker->randomElement(['Laki-laki', 'Perempuan']);
             $data->nip = $faker->numerify('############');
+            $data->nik = $faker->numerify('###############');
             $data->nama = $faker->name($gender);
             $data->email =  'user'.$i.'@gmail.com';
             $data->password =  Hash::make('user'.$i.'password');
@@ -67,6 +68,7 @@ class PegawaiSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
+            'nik' => Faker::create('id_ID')->numerify('##########'),
             'nip' => Faker::create('id_ID')->numerify('############'),
             'jenis_kelamin' => 'Laki-laki',
             'tmpt_lahir' =>  Faker::create('id_ID')->city(),

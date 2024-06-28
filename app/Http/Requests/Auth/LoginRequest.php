@@ -67,7 +67,7 @@ class LoginRequest extends FormRequest
         }*/
 
         $user = Pegawai::where('email', $this->login)
-            ->orWhere('name', $this->login)
+            ->orWhere('nama', $this->login)
             ->first();
 
         if (!$user || !Hash::check($this->password, $user->password)) {

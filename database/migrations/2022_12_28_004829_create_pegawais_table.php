@@ -15,19 +15,19 @@ return new class extends Migration
     {
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('username')->unique();
+            $table->string('username')->nullable()->unique();
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('nip', 100)->unique();
-            $table->string('nama', 100);
-            $table->string('tmpt_lahir', 40);
+            $table->string('password')->nullable();
+            $table->string('nip', 100)->unique()->nullable();
+            $table->string('nik', 100)->unique()->nullable();
+            $table->string('nama', 100)->nullable();;
+            $table->string('tmpt_lahir', 40)->nullable();;
             $table->date('tgl_lahir');
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan']);
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
             $table->string('foto', 100)->nullable();
-            $table->string('nohp', 40);
+            $table->string('nohp', 40)->nullable();
             $table->smallInteger('agama_id')->nullable();
             $table->smallInteger('negara_id')->nullable();
             $table->smallInteger('gol_darah_id')->nullable();

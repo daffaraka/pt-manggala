@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -17,9 +19,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+
+        $user = Auth::user();
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -28,15 +30,22 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\ProfileUpdateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileUpdateRequest $request)
+    public function update(Request $request, $id)
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $request->validate(
+            [
+                'password' => 'min:6|required|confirmed',
+            ]
+        );
 
-        $request->user()->save();
+
+        $pegawai = Pegawai::find($id);
+
+
+
+        $pegawai->password = Hash::make($request->password);
+        $pegawai->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
