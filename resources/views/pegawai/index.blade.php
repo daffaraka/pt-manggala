@@ -101,7 +101,8 @@
                                         <td>{{ $tampil->nip }}</td>
                                         <td>
                                             @if ($tampil->nip == Auth::user()->nip)
-                                                <a href="{{ route('pegawai.show', $tampil->id) }}" class="btn btn-info">{{ $tampil->nama }}</a>
+                                                <a href="{{ route('pegawai.show', $tampil->id) }}"
+                                                    class="btn btn-info">{{ $tampil->nama }}</a>
                                         </td>
                                     @else
                                         <p>{{ $tampil->nama }}</p>
@@ -112,12 +113,15 @@
                                 <td>{{ $tampil->jenis_kelamin }}</td>
                                 <td>{{ $tampil->nohp }}</td>
 
-                                @can(['pegawai-edit', 'pegawai-hapus'])
+                                @can('pegawai-edit')
                                     <td>
-                                        <a href="{{ url('/pegawai/' . $tampil->id . '/edit') }}" class="btn btn-info"><span
+                                        <a href="{{ url('dashboard/pegawai/' . $tampil->id . '/edit') }}" class="btn btn-info"><span
                                                 class="fa fa-edit (alias)"></span></a>
 
                                     </td>
+                                @endcan
+                                @can('pegawai-hapus')
+
                                     <td>
                                         <button class="btn btn-danger btn_modal_hapus" type="button"
                                             data-url="{{ route('pegawai.destroy', $tampil->id) }}"><span

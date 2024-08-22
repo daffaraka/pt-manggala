@@ -26,10 +26,10 @@ class PegawaiSeeder extends Seeder
         DB::table('pegawais')->delete();
 
         $poh = Poh::pluck('id')->toArray();
-        $dept =Department::pluck('id')->toArray();
+        $dept = Department::pluck('id')->toArray();
         $gol = Golongan::pluck('id')->toArray();
         $status = StatusAktiv::pluck('id')->toArray();
-        $penempatan =Penempatan::pluck('id')->toArray();
+        $penempatan = Penempatan::pluck('id')->toArray();
 
 
         for ($i = 0; $i < 10; $i++) {
@@ -39,9 +39,9 @@ class PegawaiSeeder extends Seeder
             $data->nip = $faker->numerify('############');
             $data->nik = $faker->numerify('###############');
             $data->nama = $faker->name($gender);
-            $data->email =  'user'.$i.'@gmail.com';
-            $data->password =  Hash::make('user'.$i.'password');
-            $data->username = 'user'.$i;
+            $data->email =  'user' . $i . '@gmail.com';
+            $data->password =  Hash::make('user' . $i . 'password');
+            $data->username = 'user' . $i;
             $data->jenis_kelamin = $gender;
             $data->tmpt_lahir = $faker->city();
             $data->tgl_lahir = $faker->date();
@@ -112,8 +112,5 @@ class PegawaiSeeder extends Seeder
 
         ]);
         $spv->assignRole('SPV');
-
-
-
     }
 }

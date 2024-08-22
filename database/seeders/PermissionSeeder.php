@@ -18,6 +18,7 @@ class PermissionSeeder extends Seeder
         $permissions =
             [
                 'dashboard-beranda',
+                'lihat-chart',
 
                 'pegawai-beranda',
                 'pegawai-create',

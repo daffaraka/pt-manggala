@@ -27,7 +27,7 @@ class RoleSeeder extends Seeder
             'pegawai-beranda',
             'pegawai-create',
             'pegawai-edit',
-            'pegawai-hapus',
+            // 'pegawai-hapus',
 
             'agama-beranda',
             'agama-create',

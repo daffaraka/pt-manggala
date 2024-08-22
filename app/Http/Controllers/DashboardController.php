@@ -52,6 +52,7 @@ class DashboardController extends Controller
             });
 
 
+
         $data['karyawan_perStatus'] = Pegawai::with(['statusaktivs'])->get()->groupBy(function ($item) {
             return $item->statusaktivs->nama;
         })
@@ -78,6 +79,7 @@ class DashboardController extends Controller
         $data['status_lbl'] = $status_lbl;
         $data['status_val'] = $status_val;
 
+        // dd($data['karyawan_perGolongan']);
         return view('dashboard', $data);
     }
 

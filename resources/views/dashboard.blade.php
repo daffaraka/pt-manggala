@@ -218,87 +218,89 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Status Pernikahan</h3>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Jenis Kelamin</h3>
+                        <div class="embed-responsive embed-responsive-16by9 ">
+                            <canvas class="embed-responsive-item align-items-center" width="400" height="200"
+                                id="pieChartDemo"></canvas>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Department</h3>
+                        <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiDepartment"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Per Site</h3>
+                        <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiPerSite"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Golongan</h3>
+                        <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiGolongan"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tile">
+                        <h3 class="tile-title">Pegawai Berdasarkan Status</h3>
+                        <canvas class="embed-responsive-item" width="400" height="400" id="myChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">IMPORT DATA</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('importData') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>PILIH FILE</label>
+                                    <input type="file" name="file" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                                <button type="submit" class="btn btn-info">IMPORT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         @endrole
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Status Pernikahan</h3>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Jenis Kelamin</h3>
-                    <div class="embed-responsive embed-responsive-16by9 ">
-                        <canvas class="embed-responsive-item align-items-center" width="400" height="200"
-                            id="pieChartDemo"></canvas>
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Department</h3>
-                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiDepartment"></canvas>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Per Site</h3>
-                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiPerSite"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Golongan</h3>
-                    <canvas class="embed-responsive-item" width="400" height="400" id="pegawaiGolongan"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Pegawai Berdasarkan Status</h3>
-                    <canvas class="embed-responsive-item" width="400" height="400" id="myChart"></canvas>
-                </div>
-            </div>
-
-        </div>
-
-
-
-        <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">IMPORT DATA</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{{ route('importData') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>PILIH FILE</label>
-                                <input type="file" name="file" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                            <button type="submit" class="btn btn-info">IMPORT</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     @endsection
 
 
@@ -523,75 +525,7 @@
 
 
             // Pergolongan - Donut
-            var golonganData = {!! json_encode($karyawan_perGolongan) !!};
-            var gol1 = golonganData['I']['count'];
-            var gol2 = golonganData['II']['count'];
-            var gol3 = golonganData['III']['count'];
-            var gol4 = golonganData['IV']['count'];
-            var gol5 = golonganData['V']['count'];
-            var gol6 = golonganData['VI']['count'];
-            var gol7 = golonganData['VII']['count'];
-            var golEksekutif = golonganData['Eksekutif']['count'];
-            var golonganCtx = document.getElementById('pegawaiGolongan').getContext('2d');
-            var pegawaiGolonganChart = new Chart(golonganCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Golongan I', 'Golongan II', 'Golongan III', 'Golongan IV', 'Golongan V', 'Golongan VI',
-                        'Golongan VII', 'Golongan Eksekutif'
-                    ], // Label status
-                    datasets: [{
-                        data: [gol1, gol2, gol3, gol4, gol5, gol6, gol7, golEksekutif],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)', // Warna Golongan I
-                            'rgba(54, 162, 235, 0.5)', // Warna Golongan II
-                            'rgba(75, 192, 192, 0.5)', // Warna Golongan III
-                            'rgba(153, 102, 255, 0.5)', // Warna Golongan IV
-                            'rgba(255, 159, 64, 0.5)', // Warna Golongan V
-                            'rgba(255, 205, 86, 0.5)', // Warna Golongan VI
-                            'rgba(201, 203, 207, 0.5)', // Warna Golongan VII
-                            'rgba(39, 174, 96, 0.5)' // Warna Golongan Eksekutif
-                        ],
-                    }],
-                },
 
-                options: {
-
-                    scales: {
-                        x: {
-                            categoryPercentage: 30, // Mengatur kategori lebar
-                            barPercentage: 30,
-                        },
-
-                        y: {
-                            beginAtZero: true,
-                            max: 15, // Sesuaikan dengan skala yang diinginkan
-                            ticks: {
-                                stepSize: 2,
-                            },
-                            grid: {
-                                display: true,
-                            },
-
-                        },
-                    },
-
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        datalabels: {
-                            anchor: 'center',
-                            align: 'start',
-                            formatter: function(value) {
-                                return value;
-                            },
-                            color: 'black',
-                        }
-                    },
-                },
-                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
-
-            });
 
 
 
@@ -687,6 +621,90 @@
 
 
 
+            });
+
+            var golonganData = {!! json_encode($karyawan_perGolongan) !!};
+
+            var data = [{
+                    label: 'Golongan I',
+                    count: golonganData?.['I']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan II',
+                    count: golonganData?.['II']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan III',
+                    count: golonganData?.['III']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan IV',
+                    count: golonganData?.['IV']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan V',
+                    count: golonganData?.['V']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan VI',
+                    count: golonganData?.['VI']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan VII',
+                    count: golonganData?.['VII']?.['count'] ?? 0
+                },
+                {
+                    label: 'Golongan Eksekutif',
+                    count: golonganData?.['Eksekutif']?.['count'] ?? 0
+                }
+            ];
+
+            // Filter data untuk menghilangkan bagian dengan nilai 0
+            var filteredData = data.filter(item => item.count > 0);
+
+            var labels = filteredData.map(item => item.label);
+            var counts = filteredData.map(item => item.count);
+            var colors = [
+                'rgba(255, 99, 132, 0.5)', // Warna Golongan I
+                'rgba(54, 162, 235, 0.5)', // Warna Golongan II
+                'rgba(75, 192, 192, 0.5)', // Warna Golongan III
+                'rgba(153, 102, 255, 0.5)', // Warna Golongan IV
+                'rgba(255, 159, 64, 0.5)', // Warna Golongan V
+                'rgba(255, 205, 86, 0.5)', // Warna Golongan VI
+                'rgba(201, 203, 207, 0.5)', // Warna Golongan VII
+                'rgba(39, 174, 96, 0.5)' // Warna Golongan Eksekutif
+            ];
+
+            // Ambil warna yang sesuai dengan jumlah label yang ada
+            var filteredColors = colors.slice(0, filteredData.length);
+
+            var golonganCtx = document.getElementById('pegawaiGolongan').getContext('2d');
+
+            var pegawaiGolonganChart = new Chart(golonganCtx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: filteredColors,
+                    }],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            formatter: function(value, context) {
+                                return context.chart.data.labels[context.dataIndex] + ': ' + value;
+                            },
+                            color: 'black',
+                        }
+                    },
+                },
+                plugins: [ChartDataLabels] // Tambahkan plugin datalabels
             });
         </script>
     @endsection

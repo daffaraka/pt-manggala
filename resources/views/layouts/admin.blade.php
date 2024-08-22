@@ -103,13 +103,16 @@
                         <li><a class="treeview-item {{ request()->is('pegawai') ? 'active' : '' }}"
                                 href="{{ route('pegawai.index') }}"><i class="icon fa fa-circle-o"></i> Data Pegawai</a>
                         </li>
-                        <li><a class="treeview-item {{ request()->is('pegawai/create') ? 'active' : '' }}"
-                                href="{{ route('pegawai.create') }}" target="" rel="noopener"><i
-                                    class="icon fa fa-circle-o"></i> Tambah Pegawai</a></li>
+                        @can('pegawai-create')
+                            <li><a class="treeview-item {{ request()->is('pegawai/create') ? 'active' : '' }}"
+                                    href="{{ route('pegawai.create') }}" target="" rel="noopener"><i
+                                        class="icon fa fa-circle-o"></i> Tambah Pegawai</a></li>
+                        @endcan
+
                     </ul>
                 </li>
             @endcan
-            @role(['Admin','Spv'])
+            @role(['Admin', 'Spv'])
                 <li><a class="app-menu__item {{ request()->is('chart') ? 'active' : '' }}" href="{{ url('chart') }}"><i
                             class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a>
                 </li>
