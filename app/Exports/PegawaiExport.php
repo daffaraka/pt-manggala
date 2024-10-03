@@ -18,7 +18,22 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
     private $counter = 0;
     public function collection()
     {
-        $pegawai = Pegawai::with(['agama','golongans','departments','penempatans','pohs'])->get();
+        $pegawai = Pegawai::role('user')->with([
+            'agama',
+            'negara',
+            'darah',
+            'keluarga',
+            'pendidikan',
+            'pelatihan',
+            'pengalaman',
+            'penempatans',
+            'pohs',
+            'departments',
+            'golongans',
+            'jeniskeluars',
+            'statusaktivs'
+        ])->get();
+
 
         return $pegawai;
     }
@@ -29,16 +44,28 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
         return [
             'NO',
             'Nama',
-            'Golongan',
-            'Dept',
-            'Lokasi',
-            'POH',
+            'Username',
+            'Email',
+            'NIP',
+            'NIK',
             'Tempat Lahir',
             'TGL Lahir',
+            'Jenis Kelamin',
+            'Alamat',
+            'No HP',
             'Agama',
-            'JK',
-            'NIP'
-
+            'Negara',
+            'Golongan Darah',
+            'Status Keluarga',
+            'Departemen',
+            'Penempatan',
+            'POH',
+            'Golongan',
+            'Jenis Keluar',
+            'Status Aktiv',
+            'Dokumen Satu',
+            'Dokumen Dua',
+            'Dokumen Tiga',
         ];
     }
 
@@ -47,17 +74,31 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
         return [
             ++$this->counter,  // Increment counter untuk kolom NO
             $pegawai->nama,
-            optional($pegawai->golongans)->nama,  // Menggunakan optional() untuk menghindari error jika relasi null
-            optional($pegawai->departments)->nama,
-            optional($pegawai->penempatans)->nama,
-            optional($pegawai->pohs)->nama,
+            $pegawai->username,
+            $pegawai->email,
+            $pegawai->nip,
+            $pegawai->nik,
             $pegawai->tmpt_lahir,
             $pegawai->tgl_lahir,
-            optional($pegawai->agama)->nmagama,
             $pegawai->jenis_kelamin,
-            $pegawai->nip,
+            $pegawai->alamat,
+            $pegawai->nohp,
+            optional($pegawai->agama)->nmagama,
+            optional($pegawai->negara)->nm_negara,  // Mengambil nama negara dari relasi
+            optional($pegawai->darah)->nama_gol_darah,  // Mengambil nama golongan darah dari relasi
+            optional($pegawai->keluarga)->nmstatusk,  // Mengambil status keluarga dari relasi
+            optional($pegawai->departments)->nama,  // Mengambil nama departemen dari relasi
+            optional($pegawai->penempatans)->nama,  // Mengambil nama penempatan dari relasi
+            optional($pegawai->pohs)->nama,  // Mengambil nama POH dari relasi
+            optional($pegawai->golongans)->nama,  // Mengambil nama golongan dari relasi
+            optional($pegawai->jeniskeluars)->nama,  // Mengambil jenis keluar dari relasi
+            optional($pegawai->statusaktivs)->nama,  // Mengambil status aktiv dari relasi
+            $pegawai->dokumen_satu,
+            $pegawai->dokumen_dua,
+            $pegawai->dokumen_tiga,
         ];
     }
+
 
     // public function columnFormats(): array
     // {

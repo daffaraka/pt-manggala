@@ -40,7 +40,6 @@ class DashboardController extends Controller
                 ];
             });
 
-
         $data['karyawan_perGolongan'] = Pegawai::with(['golongans'])->get()->groupBy(function ($item) {
             return $item->golongans->nama;
         })

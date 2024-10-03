@@ -71,6 +71,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Foto</th>
+                                    <th>Username</th>
                                     <th>NIP</th>
                                     <th>Nama</th>
                                     <th>TTL</th>
@@ -99,6 +100,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $tampil->nip }}</td>
+                                        <td>{{ $tampil->username }}</td>
                                         <td>
                                             @if ($tampil->nip == Auth::user()->nip)
                                                 <a href="{{ route('pegawai.show', $tampil->id) }}"

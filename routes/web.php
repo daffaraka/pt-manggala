@@ -61,10 +61,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('pegawai/pdf', [PegawaiController::class, 'pdf'])->name('pegawai-pdf');
 
 
-    Route::get('/export-excel', [PegawaiController::class, 'exportexcel'])->name('exportexcel');
-    Route::post('/import-excel', [PegawaiController::class, 'importData'])->name('importData');
-    Route::get('/tampilfoto/{id}', [PegawaiController::class, 'tampilfoto'])->name('tampilfoto');
-    Route::post('/hapusfoto/{id}', [PegawaiController::class, 'hapusfoto'])->name('hapusfoto');
+    Route::get('export-excel', [PegawaiController::class, 'exportexcel'])->name('exportexcel');
+    Route::post('import-excel', [PegawaiController::class, 'importData'])->name('importData');
+    Route::get('tampilfoto/{id}', [PegawaiController::class, 'tampilfoto'])->name('tampilfoto');
+    Route::post('hapusfoto/{id}', [PegawaiController::class, 'hapusfoto'])->name('hapusfoto');
     // Route::get('/tampildokumensatu/{id}', [PegawaiController::class, 'tampildokumensatu'])->name('tampildokumensatu');
     // Route::post('/hapusdokumensatu/{id}', [PegawaiController::class, 'hapusdokumensatu'])->name('hapusdokumensatu');
 
@@ -84,11 +84,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 });
 
 
-Route::get('/', function() {
-   return to_route('homeku');
-});
 
-Route::get('/homeku', [HomeController::class, 'index'])->name('homeku');
+Route::get('/', [HomeController::class, 'index'])->name('homeku');
 Route::get('/satumanggala', [SatuManggalaController::class, 'index'])->name('satumanggla');
 
 require __DIR__ . '/auth.php';

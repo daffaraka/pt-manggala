@@ -37,6 +37,7 @@ class Pegawai extends Authenticatable
         'id_golongan',
         'id_jeniskeluar',
         'id_statusaktiv',
+        'id_penempatan',
         'dokumen_satu',
         'dokumen_dua',
         'dokumen_tiga'

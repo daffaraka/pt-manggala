@@ -113,9 +113,9 @@
                 </li>
             @endcan
             @role(['Admin', 'Spv'])
-                <li><a class="app-menu__item {{ request()->is('chart') ? 'active' : '' }}" href="{{ url('chart') }}"><i
+                {{-- <li><a class="app-menu__item {{ request()->is('chart') ? 'active' : '' }}" href="{{ url('chart') }}"><i
                             class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a>
-                </li>
+                </li> --}}
 
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                             class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Rekap Data</span><i

@@ -2,13 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Department;
-use App\Models\Golongan;
-use App\Models\Pegawai;
-use App\Models\Penempatan;
 use App\Models\Poh;
+use App\Models\Agama;
+use App\Models\Negara;
+use App\Models\Pegawai;
+use App\Models\Golongan;
+use App\Models\Keluarga;
+use App\Models\Department;
+use App\Models\Penempatan;
 use App\Models\StatusAktiv;
 use Faker\Factory as Faker;
+use App\Models\GolonganDarah;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +34,10 @@ class PegawaiSeeder extends Seeder
         $gol = Golongan::pluck('id')->toArray();
         $status = StatusAktiv::pluck('id')->toArray();
         $penempatan = Penempatan::pluck('id')->toArray();
-
+        $agama = Agama::pluck('id_agm')->toArray();
+        $negara = Negara::pluck('id_ngr')->toArray();
+        $golDarah = GolonganDarah::pluck('id_darah')->toArray();
+        $keluarga = Keluarga::pluck('kdstatusk')->toArray();
 
         for ($i = 0; $i < 10; $i++) {
             $faker = Faker::create('id_ID');
@@ -47,10 +54,10 @@ class PegawaiSeeder extends Seeder
             $data->tgl_lahir = $faker->date();
             $data->nohp = $faker->phoneNumber();
             $data->alamat = $faker->address();
-            $data->agama_id = $faker->randomElement(['1', '2', '3', '4']);
-            $data->negara_id = $faker->randomElement(['1', '2', '3', '4']);
-            $data->gol_darah_id = $faker->randomElement(['1', '2', '3', '4']);
-            $data->skeluarga_id = $faker->randomElement(['1', '2', '3', '4']);
+            $data->agama_id = $faker->randomElement($agama);
+            $data->negara_id = $faker->randomElement($negara);
+            $data->gol_darah_id = $faker->randomElement($golDarah);
+            $data->skeluarga_id = $faker->randomElement($keluarga);
             $data->id_poh = $faker->randomElement($poh);
             $data->id_dept = $faker->randomElement($dept);
             $data->id_golongan = $faker->randomElement($gol);

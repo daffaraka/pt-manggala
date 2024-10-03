@@ -39,7 +39,7 @@ https://templatemo.com/tm-567-nomad-force
 
     <main>
 
-        <section class="hero" id="hero">
+        <section class="hero py-5 " id="hero">
             <div class="heroText">
                 <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
                     {{-- <img src="/template/docs/images/koma.jpg" class="img-fluid about-image" alt="HCIS Image" style="width: 25%; height: auto;"> --}}
@@ -51,7 +51,7 @@ https://templatemo.com/tm-567-nomad-force
                 </p>
             </div>
 
-            <div class="videoWrapper">
+            <div class="videoWrapper ">
                 <video autoplay="" loop="" muted="" class="custom-video"
                     poster="/template/docs/videos/792bd98f3e617786c850493560e11c45.jpg">
                     <source src="/template/docs/videos/mum.mp4" type="video/mp4">

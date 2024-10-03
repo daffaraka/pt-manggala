@@ -299,8 +299,6 @@
                 </div>
             </div>
         @endrole
-
-
     @endsection
 
 
@@ -312,8 +310,8 @@
         <script type="text/javascript">
             // Perstatus
             var statusData = {!! json_encode($karyawan_perStatus) !!};
-            var dataAktif = statusData['Aktif']['count'];
-            var dataTidakAktif = statusData['Tidak Aktif']['count'];
+            var dataAktif = statusData?.['Aktif']?.['count'] ?? 0;
+            var dataTidakAktif = statusData?.['Tidak Aktif']?.['count'] ?? 0;
             var statusCtx = document.getElementById('myChart').getContext('2d');
             var pegawaiStatusChart = new Chart(statusCtx, {
                 type: 'bar',
@@ -370,11 +368,12 @@
 
             // PerSite
             var siteData = {!! json_encode($karyawan_perSite) !!};
-            var BAS = siteData['BAS']['count'];
-            var PWK = siteData['PWK']['count'];
-            var BP = siteData['BP']['count'];
-            var SLR = siteData['SLR']['count'];
-            var GAM = siteData['GAM']['count'];
+            var BAS = siteData?.['BAS']?.['count'] ?? 0;
+            var PWK = siteData?.['PWK']?.['count'] ?? 0;
+            var BP = siteData?.['BP']?.['count'] ?? 0;
+            var SLR = siteData?.['SLR']?.['count'] ?? 0;
+            var GAM = siteData?.['GAM']?.['count'] ?? 0;
+
             var siteCtx = document.getElementById('pegawaiPerSite').getContext('2d');
             var pegawaiSiteChart = new Chart(siteCtx, {
                 type: 'bar',
@@ -468,12 +467,11 @@
                 'rgba(201, 203, 207, 0.5)', // Warna Golongan VII
                 'rgba(39, 174, 96, 0.5)' // Warna Golongan Eksekutif
             ];
-
             // Menghasilkan dataset untuk setiap departemen
             var datasets = allDepartments.map((department, index) => {
                 return {
                     label: department,
-                    data: Object.values(departmentData).map(item => item[department]),
+                    data: Object.values(departmentData).map(item => item?.[department]), // Menggunakan ternary untuk memeriksa nilai
                     backgroundColor: colors[index % colors.length], // Menggunakan warna yang telah ditentukan
                 };
             });
@@ -525,10 +523,6 @@
 
 
             // Pergolongan - Donut
-
-
-
-
             var data = {
                 labels: {!! json_encode($status_lbl) !!},
                 datasets: [{
@@ -626,35 +620,35 @@
             var golonganData = {!! json_encode($karyawan_perGolongan) !!};
 
             var data = [{
-                    label: 'Golongan I',
+                    label: 'Gol I',
                     count: golonganData?.['I']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan II',
+                    label: 'Gol II',
                     count: golonganData?.['II']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan III',
+                    label: 'Gol III',
                     count: golonganData?.['III']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan IV',
+                    label: 'Gol IV',
                     count: golonganData?.['IV']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan V',
+                    label: 'Gol V',
                     count: golonganData?.['V']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan VI',
+                    label: 'Gol VI',
                     count: golonganData?.['VI']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan VII',
+                    label: 'Gol VII',
                     count: golonganData?.['VII']?.['count'] ?? 0
                 },
                 {
-                    label: 'Golongan Eksekutif',
+                    label: 'Gol Eksekutif',
                     count: golonganData?.['Eksekutif']?.['count'] ?? 0
                 }
             ];
@@ -678,8 +672,8 @@
             // Ambil warna yang sesuai dengan jumlah label yang ada
             var filteredColors = colors.slice(0, filteredData.length);
 
-            var golonganCtx = document.getElementById('pegawaiGolongan').getContext('2d');
 
+            var golonganCtx = document.getElementById('pegawaiGolongan').getContext('2d');
             var pegawaiGolonganChart = new Chart(golonganCtx, {
                 type: 'pie',
                 data: {
