@@ -33,7 +33,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Nama</label>
                                 <div class="col-md-8">
-                                    <input required class="form-control" type="text" name="nama"
+                                    <input required class="form-control" type="text" name="nama" disabled
                                         value="{{ isset($user) ? $user->nama : '' }}">
                                 </div>
                             </div>
