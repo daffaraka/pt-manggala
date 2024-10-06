@@ -25,7 +25,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">NIK</label>
                                 <div class="col-md-8">
-                                    <input required class="form-control col-md-8" type="number" name="nip"
+                                    <input required class="form-control col-md-8" type="number" name="nip" disabled
                                         value="{{ isset($user) ? $user->nip : '' }}">
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Username</label>
+                                <label class="control-label col-md-3">Username</label>`
                                 <div class="col-md-8">
                                     <input required class="form-control" type="text" name="username"
                                         value="{{ isset($user) ? $user->username : '' }}">

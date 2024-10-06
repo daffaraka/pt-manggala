@@ -33,6 +33,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
 
+        dd($request->all());
         $request->validate(
             [
                 'password' => 'min:6|required|confirmed',
@@ -43,7 +44,9 @@ class ProfileController extends Controller
         $pegawai = Pegawai::find($id);
 
 
-
+        $pegawai->name = $request->name;
+        $pegawai->username = $request->username;
+        $pegawai->email = $request->email;
         $pegawai->password = Hash::make($request->password);
         $pegawai->save();
 

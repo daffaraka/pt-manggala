@@ -32,16 +32,18 @@ class PegawaiImport implements ToModel, SkipsEmptyRows
         }
 
         // Mencari data relasi berdasarkan nilai di kolom yang relevan
-        $agama = Agama::where('nmagama', $row[12])->first(); // kolom 11
-        $negara = Negara::where('nm_negara', $row[13])->first(); // kolom 12
-        $golonganDarah = GolonganDarah::where('nama_gol_darah', $row[14])->first(); // kolom 13
-        $statusKeluarga = Keluarga::where('nmstatusk', $row[15])->first(); // kolom 14
-        $department = Department::where('nama', $row[16])->first();
-        $penempatan = Penempatan::where('nama', $row[17])->first();
-        $poh = Poh::where('nama', $row[18])->first();
-        $golongan = Golongan::where('nama', $row[19])->first();
-        $jenisKeluar = JenisKeluar::where('nama', $row[20])->first(); // kolom 18
-        $statusAktiv = StatusAktiv::where('nama', $row[21])->first(); // kolom 19
+
+        // Mencari data relasi berdasarkan nilai di kolom yang relevan
+        $agama = Agama::where('nmagama', $row[15])->first(); // kolom agama
+        $negara = Negara::where('nm_negara', $row[16])->first(); // kolom negara
+        $golonganDarah = GolonganDarah::where('nama_gol_darah', $row[17])->first(); // kolom golongan darah
+        $statusKeluarga = Keluarga::where('nmstatusk', $row[18])->first(); // kolom status keluarga
+        $department = Department::where('nama', $row[19])->first(); // kolom departemen
+        $penempatan = Penempatan::where('nama', $row[20])->first(); // kolom penempatan
+        $poh = Poh::where('nama', $row[21])->first(); // kolom POH
+        $golongan = Golongan::where('nama', $row[22])->first(); // kolom golongan
+        $jenisKeluar = JenisKeluar::where('nama', $row[23])->first(); // kolom jenis keluar
+        $statusAktiv = StatusAktiv::where('nama', $row[24])->first(); // kolom status aktiv
 
         // Membuat instance Pegawai dengan data yang diimport
         return new Pegawai([
@@ -53,23 +55,25 @@ class PegawaiImport implements ToModel, SkipsEmptyRows
             'tmpt_lahir'      => $row[6],
             'tgl_lahir'       => $row[7],
             'jenis_kelamin'   => $row[8],
-            'nohp'            => $row[9],
-            'alamat'          => $row[10],
-            'desa'            => $row[11],
+            'desa'            => $row[9],
+            'kelurahan'       => $row[10],
+            'kecamatan'       => $row[11],
+            'kota'            => $row[12],
+            'alamat'          => $row[13],
+            'nohp'            => $row[14],
             'agama_id'        => $agama ? $agama->id_agm : null,
             'negara_id'       => $negara ? $negara->id_ngr : null,
             'gol_darah_id'    => $golonganDarah ? $golonganDarah->id_darah : null,
             'skeluarga_id'    => $statusKeluarga ? $statusKeluarga->kdstatusk : null,
-            'id_golongan'     => $golongan ? $golongan->id : null,
             'id_dept'         => $department ? $department->id : null,
             'id_penempatan'   => $penempatan ? $penempatan->id : null,
             'id_poh'          => $poh ? $poh->id : null,
+            'id_golongan'     => $golongan ? $golongan->id : null,
             'id_jeniskeluar'  => $jenisKeluar ? $jenisKeluar->id : null,
             'id_statusaktiv'  => $statusAktiv ? $statusAktiv->id : null,
-            'dokumen_satu'    => $row[22],
-            'dokumen_dua'     => $row[23],
-            'dokumen_tiga'    => $row[24],
+            'dokumen_satu'    => $row[25],
+            'dokumen_dua'     => $row[26],
+            'dokumen_tiga'    => $row[27],
         ]);
     }
-
 }

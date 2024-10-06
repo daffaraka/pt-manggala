@@ -52,6 +52,9 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
             'TGL Lahir',
             'Jenis Kelamin',
             'Desa',
+            'Kelurahan',
+            'Kecamatan',
+            'Kota',
             'Alamat',
             'No HP',
             'Agama',
@@ -83,6 +86,9 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
             $pegawai->tgl_lahir,
             $pegawai->jenis_kelamin,
             $pegawai->desa,
+            $pegawai->kelurahan,
+            $pegawai->kecamatan,
+            $pegawai->kota,
             $pegawai->alamat,
             $pegawai->nohp,
             optional($pegawai->agama)->nmagama,
@@ -110,3 +116,4 @@ class PegawaiExport implements FromCollection, WithHeadings, WithMapping
     //     ];
     // }
 }
+
