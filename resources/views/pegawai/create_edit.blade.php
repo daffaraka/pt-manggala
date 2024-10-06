@@ -81,6 +81,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="control-label col-md-3">Kelurahan</label>
+                            <div class="col-md-8">
+                                <input class="form-control col-md-8" type="text" name="kelurahan"
+                                    value="{{ isset($pegawai) ? $pegawai->kelurahan : '' }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="control-label col-md-3">Kecamatan</label>
                             <div class="col-md-8">
                                 <input class="form-control col-md-8" type="text" name="kecamatan"
@@ -88,10 +95,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-md-3">Kabupaten</label>
+                            <label class="control-label col-md-3">Kabupaten/Kota</label>
                             <div class="col-md-8">
-                                <input class="form-control col-md-8" type="text" name="kabupaten"
-                                    value="{{ isset($pegawai) ? $pegawai->kabupaten : '' }}">
+                                <input class="form-control col-md-8" type="text" name="kota"
+                                    value="{{ isset($pegawai) ? $pegawai->kota : '' }}">
                             </div>
                         </div>
                         {{-- <div class="form-group row">
@@ -136,13 +143,13 @@
 
 
                         <div class="form-group row">
-                            <label class="control-label col-md-3">Penempatan Site</label>
+                            <label class="control-label col-md-3 required">Penempatan Site</label>
                             <div class="col-md-8">
-                                <select class="form-control" name="id_penempatans" id="id_penempatans">
+                                <select class="form-control" name="id_penempatan" id="id_penempatan" required>
                                     <option value="">Pilih Site</option>
                                     @foreach ($penempatans as $item)
                                         <option value="{{ $item->id }}"
-                                            {{ old('id_penempatans', $pegawai->id_penempatans ?? '') == $item->id ? 'selected' : '' }}>
+                                            {{ old('id_penempatan', $pegawai->id_penempatan ?? '') == $item->id ? 'selected' : '' }}>
                                             {{ $item->nama }}
                                         </option>
                                     @endforeach
@@ -150,9 +157,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-md-3">POH</label>
+                            <label class="control-label col-md-3 required">POH</label>
                             <div class="col-md-8">
-                                <select class="form-control" name="id_poh" id="id_poh">
+                                <select class="form-control" name="id_poh" id="id_poh" required>
                                     <option value="">Pilih POH</option>
                                     @foreach ($pohs as $item)
                                         <option value="{{ $item->id }}"
@@ -164,9 +171,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-md-3">Departement</label>
+                            <label class="control-label col-md-3 required">Departement</label>
                             <div class="col-md-8">
-                                <select class="form-control" name="id_dept" id="id_dept">
+                                <select class="form-control" name="id_dept" id="id_dept" required>
                                     <option value="">Pilih Department</option>
                                     @foreach ($departments as $item)
                                         <option value="{{ $item->id }}"
@@ -178,9 +185,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-md-3">Golongan</label>
+                            <label class="control-label col-md-3 required">Golongan</label>
                             <div class="col-md-8">
-                                <select class="form-control" name="id_golongan" id="id_golongan">
+                                <select class="form-control" name="id_golongan" id="id_golongan" required>
                                     <option value="">Pilih Golongan</option>
                                     @foreach ($golongans as $item)
                                         <option value="{{ $item->id }}"
@@ -353,14 +360,14 @@
                             <label class="control-label col-md-3">No Rekening</label>
                             <div class="col-md-8">
 
-                                <input class="form-control col-md-8" type="number" name="norek"
+                                <input class="form-control col-md-8" type="number" name="no_rek"
                                     value="{{ isset($pegawai) ? $pegawai->norek : '' }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3">Nama Bank</label>
                             <div class="col-md-8">
-                                <input class="form-control col-md-8" type="text" name="namabank"
+                                <input class="form-control col-md-8" type="text" name="nama_bank"
                                     value="{{ isset($pegawai) ? $pegawai->namabank : '' }}">
                             </div>
                         </div>

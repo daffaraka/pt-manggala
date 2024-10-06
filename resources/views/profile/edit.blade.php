@@ -38,6 +38,23 @@
                                 </div>
                             </div>
 
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Email</label>
+                                <div class="col-md-8">
+                                    <input required class="form-control" type="email" name="email"
+                                        value="{{ isset($user) ? $user->email : '' }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Username</label>
+                                <div class="col-md-8">
+                                    <input required class="form-control" type="text" name="username"
+                                        value="{{ isset($user) ? $user->username : '' }}">
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Password</label>
                                 <div class="col-md-8">

@@ -38,6 +38,9 @@ class PegawaiSeeder extends Seeder
         $negara = Negara::pluck('id_ngr')->toArray();
         $golDarah = GolonganDarah::pluck('id_darah')->toArray();
         $keluarga = Keluarga::pluck('kdstatusk')->toArray();
+        $desa = ['Desa A', 'Desa B', 'Desa C', 'Desa D', 'Desa E', 'Desa F'];
+        $kecamatan = ['Kecamatan A', 'Kecamatan B', 'Kecamatan C', 'Kecamatan D', 'Kecamatan E', 'Kecamatan F'];
+        $kelurahan = ['Kelurahan A', 'Kelurahan B', 'Kelurahan C', 'Kelurahan D', 'Kelurahan E', 'Kelurahan F'];
 
         for ($i = 0; $i < 10; $i++) {
             $faker = Faker::create('id_ID');
@@ -54,6 +57,10 @@ class PegawaiSeeder extends Seeder
             $data->tgl_lahir = $faker->date();
             $data->nohp = $faker->phoneNumber();
             $data->alamat = $faker->address();
+            $data->desa = $faker->randomElement($desa);
+            $data->kelurahan = $faker->randomElement($kelurahan);
+            $data->kecamatan = $faker->randomElement($kecamatan);
+            $data->kota = $faker->city();
             $data->agama_id = $faker->randomElement($agama);
             $data->negara_id = $faker->randomElement($negara);
             $data->gol_darah_id = $faker->randomElement($golDarah);
@@ -63,12 +70,11 @@ class PegawaiSeeder extends Seeder
             $data->id_golongan = $faker->randomElement($gol);
             $data->id_statusaktiv = $faker->randomElement($status);
             $data->id_penempatan = $faker->randomElement($penempatan);
+            $data->tgl_masuk = $faker->date();
+            $data->tgl_keluar = date('Y-m-d', strtotime($data->tgl_masuk . '+1 year'));
             $data->save();
             $data->assignRole('user');
         }
-
-
-
 
         $admin = Pegawai::create([
             'nama' => 'Admin',
@@ -82,6 +88,10 @@ class PegawaiSeeder extends Seeder
             'tgl_lahir' =>  Faker::create('id_ID')->date(),
             'nohp' => Faker::create('id_ID')->phoneNumber(),
             'alamat' => Faker::create('id_ID')->address(),
+            'desa' => Faker::create('id_ID')->randomElement($desa),
+            'kelurahan' => Faker::create('id_ID')->randomElement($kelurahan),
+            'kecamatan' => Faker::create('id_ID')->randomElement($kecamatan),
+            'kota' =>  Faker::create('id_ID')->city(),
             'agama_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
             'negara_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
             'gol_darah_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
@@ -91,6 +101,8 @@ class PegawaiSeeder extends Seeder
             'id_golongan' => $faker->randomElement($gol),
             'id_statusaktiv' => $faker->randomElement($status),
             'id_penempatan' => $faker->randomElement($penempatan),
+            'tgl_masuk' =>  Faker::create('id_ID')->date(),
+            'tgl_keluar' => date('Y-m-d', strtotime(Faker::create('id_ID')->date() . '+1 year')),
 
         ]);
         $admin->assignRole('Admin');
@@ -106,6 +118,10 @@ class PegawaiSeeder extends Seeder
             'tgl_lahir' =>  Faker::create('id_ID')->date(),
             'nohp' => Faker::create('id_ID')->phoneNumber(),
             'alamat' => Faker::create('id_ID')->address(),
+            'desa' => Faker::create('id_ID')->randomElement($desa),
+            'kelurahan' => Faker::create('id_ID')->randomElement($kelurahan),
+            'kecamatan' => Faker::create('id_ID')->randomElement($kecamatan),
+            'kota' =>  Faker::create('id_ID')->city(),
             'agama_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
             'negara_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
             'gol_darah_id' => Faker::create('id_ID')->randomElement(['1', '2', '3', '4']),
@@ -115,9 +131,11 @@ class PegawaiSeeder extends Seeder
             'id_golongan' => $faker->randomElement($gol),
             'id_statusaktiv' => $faker->randomElement($status),
             'id_penempatan' => $faker->randomElement($penempatan),
-
+            'tgl_masuk' =>  Faker::create('id_ID')->date(),
+            'tgl_keluar' => date('Y-m-d', strtotime(Faker::create('id_ID')->date() . '+1 year')),
 
         ]);
         $spv->assignRole('SPV');
     }
 }
+

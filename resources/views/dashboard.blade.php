@@ -102,9 +102,9 @@
                             <td>{{ Auth::user()->kecamatan }}</td>
                             </tr>
                             </tr>
-                            <td> Kabupaten</td>
+                            <td> Kabupaten/Kota</td>
                             <td>:</td>
-                            <td>{{ Auth::user()->kabupaten }}</td>
+                            <td>{{ Auth::user()->kota }}</td>
                             </tr>
                             </tr>
                             <td> Tanggal Masuk</td>

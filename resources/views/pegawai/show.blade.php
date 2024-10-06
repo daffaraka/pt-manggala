@@ -91,9 +91,9 @@
                             <td>{{ $pegawai->kecamatan }}</td>
                             </tr>
                             </tr>
-                            <td> Kabupaten</td>
+                            <td> Kabupaten/Kota</td>
                             <td>:</td>
-                            <td>{{ $pegawai->kabupaten }}</td>
+                            <td>{{ $pegawai->kota }}</td>
                             </tr>
                             </tr>
                             <td> Tanggal Masuk</td>

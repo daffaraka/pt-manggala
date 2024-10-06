@@ -26,6 +26,10 @@ class Pegawai extends Authenticatable
         'tgl_lahir',
         'jenis_kelamin',
         'alamat',
+        'desa',
+        'kelurahan',
+        'kecamatan',
+        'kota',
         'foto',
         'nohp',
         'agama_id',
@@ -40,7 +44,13 @@ class Pegawai extends Authenticatable
         'id_penempatan',
         'dokumen_satu',
         'dokumen_dua',
-        'dokumen_tiga'
+        'dokumen_tiga',
+        'tgl_masuk',
+        'tgl_keluar',
+        'note_keluar',
+        'no_rek',
+        'nama_bank',
+
     ];
 
     protected $hidden = [

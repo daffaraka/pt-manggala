@@ -20,6 +20,7 @@ use App\Imports\PegawaiImport;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PegawaiController extends Controller
 {
@@ -77,6 +78,19 @@ class PegawaiController extends Controller
 
         // dd($request->all());
 
+        $validator = Validator::make($request->all(), [
+            'id_penempatan' => 'required',
+            'id_poh' => 'required',
+            'id_dept' => 'required',
+            'id_golongan' => 'required',
+            'id_jeniskeluar' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+            //redirect
+
+        }
 
 
         // File
@@ -85,21 +99,54 @@ class PegawaiController extends Controller
         $requestFile2 = $request->file('dokumen_dua');
         $requestFile3 = $request->file('dokumen_tiga');
 
-        $fileFoto = $request->file('foto')->getClientOriginalName();
-        $fileDokumen1 = $request->file('dokumen_satu')->getClientOriginalName();
-        $fileDokumen2 = $request->file('dokumen_dua')->getClientOriginalName();
-        $fileDokumen3 = $request->file('dokumen_tiga')->getClientOriginalName();
+
+        if ($requestFileFoto) {
+            $fileFoto = $request->file('foto')->getClientOriginalName();
+            $fileFotoSaved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileFoto;
+            $requestFileFoto->move('berkas/pegawai/foto', $fileFotoSaved);
+        } else {
+            $fileFotoSaved = null;
+        }
 
 
-        $fileFotoSaved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileFoto;
-        $fileDok1Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen1;
-        $fileDok2Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen2;
-        $fileDok3Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen3;
+        if ($requestFile1) {
+            $fileDok1 = $request->file('dokumen_satu')->getClientOriginalName();
+            $fileDok1Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDok1;
+            $requestFile1->move('berkas/pegawai/dokumen_satu/', $fileDok1Saved);
+        } else {
+            $fileDok1Saved = null;
+        }
 
-        $requestFileFoto->move('berkas/pegawai/foto', $fileFotoSaved);
-        $requestFile1->move('berkas/pegawai/dokumen_satu', $fileDok1Saved);
-        $requestFile2->move('berkas/pegawai/dokumen_dua', $fileDok2Saved);
-        $requestFile3->move('berkas/pegawai/dokumen_tiga', $fileDok3Saved);
+        if ($requestFile2) {
+            $fileDok2 = $request->file('dokumen_dua')->getClientOriginalName();
+            $fileDok2Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDok2;
+            $requestFile2->move('berkas/pegawai/dokumen_dua/', $fileDok2Saved);
+        } else {
+            $fileDok2Saved = null;
+        }
+
+        if ($requestFile3) {
+            $fileDok3 = $request->file('dokumen_tiga')->getClientOriginalName();
+            $fileDok3Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDok3;
+            $requestFile3->move('berkas/pegawai/dokumen_tiga/', $fileDok3Saved);
+        } else {
+            $fileDok3Saved = null;
+        }
+        // // $fileFoto = $request->file('foto')->getClientOriginalName();
+        // $fileDokumen1 = $request->file('dokumen_satu')->getClientOriginalName();
+        // $fileDokumen2 = $request->file('dokumen_dua')->getClientOriginalName();
+        // $fileDokumen3 = $request->file('dokumen_tiga')->getClientOriginalName();
+
+
+        // // $fileFotoSaved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileFoto;
+        // $fileDok1Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen1;
+        // $fileDok2Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen2;
+        // $fileDok3Saved = $request->nip . '-' . now()->format('Y-m-d_H-i-s') . '-' . $fileDokumen3;
+
+
+        // $requestFile1->move('berkas/pegawai/dokumen_satu', $fileDok1Saved);
+        // $requestFile2->move('berkas/pegawai/dokumen_dua', $fileDok2Saved);
+        // $requestFile3->move('berkas/pegawai/dokumen_tiga', $fileDok3Saved);
 
 
         $pegawai = new Pegawai;
@@ -118,9 +165,10 @@ class PegawaiController extends Controller
 
         $pegawai->nik = $request->nik;
         $pegawai->desa = $request->desa;
+        $pegawai->kelurahan = $request->kelurahan;
         $pegawai->kecamatan = $request->kecamatan;
-        $pegawai->kabupaten = $request->kabupaten;
-        $pegawai->id_penempatans = $request->id_penempatans;
+        $pegawai->kota = $request->kota;
+        $pegawai->id_penempatan = $request->id_penempatan;
         $pegawai->id_poh = $request->id_poh;
         $pegawai->id_dept = $request->id_dept;
         $pegawai->id_golongan = $request->id_golongan;
@@ -132,8 +180,8 @@ class PegawaiController extends Controller
         $pegawai->dokumen_satu = $fileDok1Saved;
         $pegawai->dokumen_dua = $fileDok2Saved;
         $pegawai->dokumen_tiga = $fileDok3Saved;
-        $pegawai->norek = $request->norek;
-        $pegawai->namabank = $request->namabank;
+        $pegawai->no_rek = $request->no_rek;
+        $pegawai->nama_bank = $request->nama_bank;
 
 
         $pegawai->agama_id = $request->agama_id;
@@ -143,7 +191,7 @@ class PegawaiController extends Controller
 
         $pegawai->save();
 
-        return redirect('pegawai')->with('success', 'Data berhasil disimpan');
+        return to_route('pegawai.index')->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -182,7 +230,7 @@ class PegawaiController extends Controller
         $data['jeniskeluars'] = JenisKeluar::all();
         $data['statusaktivs'] = StatusAktiv::all();
 
-
+        // dd($data['pegawai']);
 
         return view('pegawai.create_edit', $data);
     }
@@ -285,9 +333,10 @@ class PegawaiController extends Controller
 
         $pegawai->nik = $request->nik;
         $pegawai->desa = $request->desa;
+        $pegawai->kelurahan = $request->kelurahan;
         $pegawai->kecamatan = $request->kecamatan;
-        $pegawai->kabupaten = $request->kabupaten;
-        $pegawai->id_penempatans = $request->id_penempatans;
+        $pegawai->kota = $request->kota;
+        $pegawai->id_penempatan = $request->id_penempatan;
         $pegawai->id_poh = $request->id_poh;
         $pegawai->id_dept = $request->id_dept;
         $pegawai->id_golongan = $request->id_golongan;
@@ -299,13 +348,13 @@ class PegawaiController extends Controller
         $pegawai->dokumen_satu = $fileDok1Saved;
         $pegawai->dokumen_dua = $fileDok2Saved;
         $pegawai->dokumen_tiga = $fileDok3Saved;
-        $pegawai->norek = $request->norek;
-        $pegawai->namabank = $request->namabank;
+        $pegawai->no_rek = $request->no_rek;
+        $pegawai->nama_bank = $request->nama_bank;
 
         $pegawai->save();
 
 
-        return redirect('pegawai')->with('success', 'Data berhasil disimpan');
+        return to_route('pegawai.index')->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -326,9 +375,7 @@ class PegawaiController extends Controller
         $pdf = PDF::loadView('pegawai.pdf', ['pegawai' => $pegawai]);
         return $pdf->download('pegawai.pdf');
     }
-    public function uploadproduct($id)
-    {
-    }
+    public function uploadproduct($id) {}
     // public function chartByDepartment()
     // {
     // // Ambil data jumlah pegawai berdasarkan departemen
@@ -396,7 +443,7 @@ class PegawaiController extends Controller
 
     public function importData(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
 
@@ -404,13 +451,13 @@ class PegawaiController extends Controller
 
         $nama_file = $file->hashName();
 
-        $path = $file->storeAs('public/excel/',$nama_file);
+        $path = $file->storeAs('public/excel/', $nama_file);
 
-        $import = Excel::import(new PegawaiImport(), storage_path('app/public/excel/'.$nama_file));
+        $import = Excel::import(new PegawaiImport(), storage_path('app/public/excel/' . $nama_file));
 
         Storage::delete($path);
 
-        if($import) {
+        if ($import) {
             //redirect
             return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
         } else {

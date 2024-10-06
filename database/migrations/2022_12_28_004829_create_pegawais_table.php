@@ -21,10 +21,14 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('nip', 100)->unique()->nullable();
             $table->string('nik', 100)->unique()->nullable();
-            $table->string('nama', 100)->nullable();;
-            $table->string('tmpt_lahir', 40)->nullable();;
+            $table->string('nama', 100)->nullable();
+            $table->string('tmpt_lahir', 40)->nullable();
             $table->date('tgl_lahir');
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan']);
+            $table->string('desa');
+            $table->string('kelurahan');
+            $table->string('kecamatan');
+            $table->string('kota');
             $table->string('alamat')->nullable();
             $table->string('foto', 100)->nullable();
             $table->string('nohp', 40)->nullable();
@@ -41,6 +45,11 @@ return new class extends Migration
             $table->string('dokumen_satu', 100)->nullable()->nullable();
             $table->string('dokumen_dua', 100)->nullable()->nullable();
             $table->string('dokumen_tiga', 100)->nullable()->nullable();
+            $table->string('nama_bank')->nullable();
+            $table->string('no_rek')->nullable();
+            $table->date('tgl_masuk')->nullable();
+            $table->date('tgl_keluar')->nullable();
+            $table->string('note_keluar')->nullable();
             $table->timestamps();
 
 

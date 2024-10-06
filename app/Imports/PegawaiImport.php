@@ -32,16 +32,16 @@ class PegawaiImport implements ToModel, SkipsEmptyRows
         }
 
         // Mencari data relasi berdasarkan nilai di kolom yang relevan
-        $agama = Agama::where('nmagama', $row[11])->first(); // kolom 11
-        $negara = Negara::where('nm_negara', $row[12])->first(); // kolom 12
-        $golonganDarah = GolonganDarah::where('nama_gol_darah', $row[13])->first(); // kolom 13
-        $statusKeluarga = Keluarga::where('nmstatusk', $row[14])->first(); // kolom 14
-        $department = Department::where('nama', $row[15])->first();
-        $penempatan = Penempatan::where('nama', $row[16])->first();
-        $poh = Poh::where('nama', $row[17])->first();
-        $golongan = Golongan::where('nama', $row[18])->first();
-        $jenisKeluar = JenisKeluar::where('nama', $row[19])->first(); // kolom 18
-        $statusAktiv = StatusAktiv::where('nama', $row[20])->first(); // kolom 19
+        $agama = Agama::where('nmagama', $row[12])->first(); // kolom 11
+        $negara = Negara::where('nm_negara', $row[13])->first(); // kolom 12
+        $golonganDarah = GolonganDarah::where('nama_gol_darah', $row[14])->first(); // kolom 13
+        $statusKeluarga = Keluarga::where('nmstatusk', $row[15])->first(); // kolom 14
+        $department = Department::where('nama', $row[16])->first();
+        $penempatan = Penempatan::where('nama', $row[17])->first();
+        $poh = Poh::where('nama', $row[18])->first();
+        $golongan = Golongan::where('nama', $row[19])->first();
+        $jenisKeluar = JenisKeluar::where('nama', $row[20])->first(); // kolom 18
+        $statusAktiv = StatusAktiv::where('nama', $row[21])->first(); // kolom 19
 
         // Membuat instance Pegawai dengan data yang diimport
         return new Pegawai([
@@ -53,8 +53,9 @@ class PegawaiImport implements ToModel, SkipsEmptyRows
             'tmpt_lahir'      => $row[6],
             'tgl_lahir'       => $row[7],
             'jenis_kelamin'   => $row[8],
-            'alamat'          => $row[9],
-            'nohp'            => $row[10],
+            'nohp'            => $row[9],
+            'alamat'          => $row[10],
+            'desa'            => $row[11],
             'agama_id'        => $agama ? $agama->id_agm : null,
             'negara_id'       => $negara ? $negara->id_ngr : null,
             'gol_darah_id'    => $golonganDarah ? $golonganDarah->id_darah : null,
@@ -65,9 +66,9 @@ class PegawaiImport implements ToModel, SkipsEmptyRows
             'id_poh'          => $poh ? $poh->id : null,
             'id_jeniskeluar'  => $jenisKeluar ? $jenisKeluar->id : null,
             'id_statusaktiv'  => $statusAktiv ? $statusAktiv->id : null,
-            'dokumen_satu'    => $row[21],
-            'dokumen_dua'     => $row[22],
-            'dokumen_tiga'    => $row[23],
+            'dokumen_satu'    => $row[22],
+            'dokumen_dua'     => $row[23],
+            'dokumen_tiga'    => $row[24],
         ]);
     }
 
